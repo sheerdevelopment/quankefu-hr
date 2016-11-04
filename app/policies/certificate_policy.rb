@@ -1,2 +1,0 @@
-class CertificatePolicy < ApplicationPolicy
-end

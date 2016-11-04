@@ -19,10 +19,6 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:account_update, keys: UPDATE_ATTRS)
   end
 
-  def set_endings
-    @endings = (current_user.tenancies.endings + current_user.certificates.endings)
-  end
-
   def user_not_authorized(exception)
     policy_name = exception.policy.class.to_s.underscore
 
