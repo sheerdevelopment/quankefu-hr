@@ -1,0 +1,61 @@
+.col-md-3.left_col
+  .left_col.scroll-view
+    .navbar.nav_title{:style => "border: 0;"}
+      %a.site_title{:href => root_path}
+        = image_tag "logo.png", size: "34x34"
+        %span Champs
+    .clearfix
+    / menu profile quick info
+    .profile
+      .profile_pic
+        = image_tag avatar_url, :class => "img-circle profile_img"
+      .profile_info
+        %span Welcome,
+        %h2= current_user.username
+    / /menu profile quick info
+    %br/
+    / sidebar menu
+    #sidebar-menu.main_menu_side.hidden-print.main_menu
+      .menu_section
+        %h3 General
+        %ul.nav.side-menu
+          %li{:class => ("active" if controller_name == "static_pages")}
+            %a
+              %i.fa.fa-home
+              Home
+              %span.fa.fa-chevron-down
+            %ul.nav.child_menu
+              %li
+                %a{:href => root_path} Summary
+          %li{:class => ("active" if controller_name == "tenancies")}
+            %a
+              %i.fa.fa-bank
+              Tenancies
+              %span.fa.fa-chevron-down
+            %ul.nav.child_menu{:style => ("display: block;" if controller_name == "tenancies")}
+              %li
+                %a{:href => tenancies_path} View all
+              - if current_user.admin?
+                %li
+                  %a{:href => new_tenancy_path} Add a tenancy
+          %li{:class => ("active" if controller_name == "certificates")}
+            %a
+              %i.fa.fa-file-archive-o
+              Certificates
+              %span.fa.fa-chevron-down
+            %ul.nav.child_menu
+              %li
+                %a{:href => certificates_path} View all
+              - if current_user.admin?
+                %li
+                  %a{:href => new_certificate_path} Add a certificate
+          %li{:class => ("active" if controller_name == "registrations")}
+            %a
+              %i.fa.fa-wrench
+              Settings
+              %span.fa.fa-chevron-down
+            %ul.nav.child_menu
+              %li
+                %a{:href => edit_user_registration_path} Edit profile
+
+    / /sidebar menu

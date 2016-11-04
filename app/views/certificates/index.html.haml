@@ -1,0 +1,50 @@
+- provide :body_class, "nav-md"
+
+/ page content
+.right_col{:role => "main"}
+  .row
+    .col-md-12.col-sm-12.col-xs-12
+      = will_paginate @tenancies, renderer: BootstrapPagination::Rails
+
+    .col-md-12.col-sm-12.col-xs-12
+      .x_panel
+        .x_title
+          %h2
+            Certificates
+            - if current_user.admin?
+              %small
+                %a.btn.btn-xs.btn-info{:href => new_certificate_path} Add
+          %ul.nav.navbar-right.panel_toolbox
+            %li
+              %a.collapse-link
+                %i.fa.fa-chevron-up
+            %li
+              %a.close-link
+                %i.fa.fa-close
+          .clearfix
+        .x_content
+          %table.table.table-hover
+            %thead
+              %tr
+                %th Name
+                %th Document Type
+                %th Expiry date
+                %th File
+                %th Created at
+                - if current_user.admin?
+                  %th Delete
+            %tbody
+              - @certificates.each do |certificate|
+                %tr
+                  %td
+                    %a{:href => certificate_path(certificate)}
+                      .label.label-primary= certificate.name
+                  %td= certificate.doc_type.name
+                  %td= certificate.expiry_date
+                  %td= link_to certificate.file_file_name, certificate.file.url
+                  %td= certificate.created_at.localtime.strftime("%Y-%m-%d %H:%M:%S")
+                  - if current_user.admin?
+                    %td= link_to "<i class='fa fa-trash-o'></i> Delete ".html_safe, certificate, method: :delete, data: { confirm: "Are you sure to delete #{certificate.name}?" }, class: "btn btn-danger btn-xs"
+
+    .col-md-12.col-sm-12.col-xs-12
+      = will_paginate @tenancies, renderer: BootstrapPagination::Rails

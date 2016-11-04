@@ -1,0 +1,34 @@
+- provide :body_class, "login"
+
+%div
+  .login_wrapper
+    .animate.form.login_form
+      %section.login_content
+        %form.new_user{"accept-charset" => "UTF-8", :action => user_registration_path, :method => "post"}
+          %input{:name => "utf8", :type => "hidden", :value => "✓"}/
+          %input{:name => "authenticity_token", :type => "hidden", :value => form_authenticity_token}/
+
+          %h1 Create Account
+
+          = devise_error_messages!
+
+          %div
+            %input.form-control{:placeholder => "Email", :required => "", :type => "email", :name => "user[email]", :id => "user_email"}/
+          %div
+            %input.form-control{:placeholder => "Password", :required => "", :type => "password", :name => "user[password]", :id => "user_password"}/
+          %div
+            %input.form-control{:placeholder => "confirmation", :required => "", :type => "password", :name => "user[password_confirmation]", :id => "user_password_confirmation"}/
+          %div
+            %button.btn.btn-default.submit{:type => "submit"} Submit
+          .clearfix
+          .separator
+            %p.change_link
+              Already a member ?
+              %a.to_register{:href => new_user_session_path} Log in
+            .clearfix
+            %br/
+            %div
+              %h1
+                = image_tag "logo.png", size: "34x34"
+                Champs
+              %p ©2016 All Rights Reserved. SHEERDEVELOPMENT

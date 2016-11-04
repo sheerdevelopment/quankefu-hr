@@ -1,0 +1,43 @@
+Laborforce Specification
+
+Introduction
+
+This project aims to create an iOS app that allows users hastily searching the nearby handyman services, with transparent costs. Meanwhile, anyone can register as the service provider, once the registeration has been approved (TBC).
+
+The target marketing audience is people around 25~55. (TBC) But should still allow anyone to register.
+
+As the iOS app, the app should be compatible from 8.X to the latest. This app is to focus on iPhone version, it's a bonus if it's adaptable to iPad. Technologically, the programming language should be Swift, use postgresql as the database, the backend RESTful API ideally should be used Go.
+
+Milestones (TBC)
+
+Budge - Up to 2K
+
+Functional requirements
+
+- The app allows user to register as normal user.
+- The resisteration requires email, as the unique ID. Send verification email.
+- The app allows user to register with facebook account.
+- The app allows user to register with twitter account.
+- The app allows user to register with google account.
+- The API protocal is HTTPS.
+- When offline, user is able to review the cached data.
+- In-app purchase (TBC).
+- The app allows user to search services providers based on Geo-location.
+- The app allows user to publish a handyman request.
+- The app allows user to change notification preference.
+- The request contains job descriptions.
+- The request contains job address.
+- Service providers can search job requests.
+- Service providers get push notification when new job publishes.
+- Service providers can change notification preference.
+- The app allows user to make comments on the service providers.
+
+### UI -- our in-house designer --
+
+Un-functional requirements
+
+- The app must respond to users action within 3 seconds.
+- The app must be able to handle high concurrency requests.
+- The backend must be able to handle at least 3K users.
+- The app must run stablily 7X24 hours.
+- The app must easy to scale and extend.

@@ -1,0 +1,127 @@
+.right_col{:role => "main"}
+  %div
+    .page-title
+      .title_left
+        %h3= title
+      .clearfix
+
+      .row
+        .col-md-12.col-sm-12.col-xs-12
+          .x_panel
+            .x_content
+              %br/
+              = form_for(@tenancy, html: { class: "form-horizontal form-label-left" }) do |f|
+                = render "shared/error_messages", object: @tenancy
+
+                .form-group
+                  %label.control-label.col-md-3.col-sm-3.col-xs-12{:for => "name"}
+                    Name
+                    %span.required *
+                  .entry
+                    .col-md-3.col-sm-3.col-xs-6.input-field
+                      %input.form-control.col-md-7.col-xs-12{:placeholder => "Give it a name", :name => "tenancy[name]", :type => "text", :value => @tenancy.name}/
+
+                .form-group.tenants-form
+                  %label.control-label.col-md-3.col-sm-3.col-xs-12{:for => "tenants"}
+                    Tenants
+                    %span.required *
+                  .entry
+                    .col-md-3.col-sm-3.col-xs-6.input-field
+                      %input.form-control.col-md-7.col-xs-12{:placeholder => "Tenant", :name => "tenancy[tenants][]", :type => "text", :value => @tenancy.tenants}/
+                    .col-md-3.col-sm-3.col-xs-6
+                      %button.btn.btn-success.btn-add
+                        %i.fa.fa-plus
+
+                .form-group
+                  %label.control-label.col-md-3.col-sm-3.col-xs-12{:for => "term"}
+                    Term
+                    %span.required *
+                  .col-md-3.col-sm-3.col-xs-12
+                    %select#term.form-control.col-md-7.col-xs-12{:required => "", :name => "tenancy[term]"}
+                      - (1..48).each do |n|
+                        %option{:value => n, :selected => @tenancy.term == n ? "selected" : nil}= pluralize(n, "month")
+
+                .form-group
+                  %label.control-label.col-md-3.col-sm-3.col-xs-12{:for => "rent"}
+                    Rent
+                    %span.required *
+                  .col-md-3.col-sm-3.col-xs-12
+                    #rent.input-group
+                      %span.input-group-addon
+                        %span
+                          %i.fa.fa-gbp
+                      %input.form-control.col-md-7.col-xs-12{:type => "number", :name => "tenancy[rent]", :min => 0, :value => @tenancy.rent}/
+                      %span.input-group-addon
+                        %span PCM
+
+                .form-group
+                  %label.control-label.col-md-3.col-sm-3.col-xs-12{:for => "deposit"}
+                    Deposit
+                    %span.required *
+                  .col-md-3.col-sm-3.col-xs-12
+                    #deposit.input-group
+                      %span.input-group-addon
+                        %span
+                          %i.fa.fa-gbp
+                      %input.form-control.col-md-7.col-xs-12{:type => "number", :name => "tenancy[deposit]", :min => 0, :value => @tenancy.deposit}/
+                      %span.input-group-addon
+                        %span PCM
+
+                .form-group
+                  %label.control-label.col-md-3.col-sm-3.col-xs-12{:for => "start_date"}
+                    Start date
+                    %span.required *
+                  .col-md-3.col-sm-3.col-xs-12
+                    #start_date.input-group
+                      %input.form-control.col-md-7.col-xs-12{:type => "text", :name => "tenancy[start_date]", :value => @tenancy.try(:start_date).try(:strftime, "%F")}/
+                      %span.input-group-addon
+                        %i.fa.fa-calendar
+
+                .form-group
+                  %label.control-label.col-md-3.col-sm-3.col-xs-12{:for => "end_date"}
+                    End date
+                    %span.required *
+                  .col-md-3.col-sm-3.col-xs-12
+                    #end_date.input-group
+                      %input.form-control.col-md-7.col-xs-12{:type => "text", :name => "tenancy[end_date]", :value => @tenancy.try(:end_date).try(:strftime, "%F")}/
+                      %span.input-group-addon
+                        %i.fa.fa-calendar
+
+                .ln_solid
+                .form-group
+                  .col-md-6.col-sm-6.col-xs-12.col-md-offset-3
+                    %button.btn.btn-success{:type => "submit"} Submit
+
+= javascript_include_tag "bootstrap-datetimepicker.min"
+
+:javascript
+  $(function() {
+    $(document).on('click', '.btn-add', function(e) {
+        e.preventDefault();
+
+        var controlForm = $('.tenants-form'),
+            currentEntry = $(this).parents('.entry'),
+            newEntry = $(currentEntry.clone()).appendTo(controlForm);
+
+        newEntry.find('input').val('');
+        newEntry.find('.input-field').addClass('col-md-offset-3 col-sm-offset-3');
+        controlForm.find('.entry:not(:last) .btn-add')
+            .removeClass('btn-add').addClass('btn-remove')
+            .removeClass('btn-success').addClass('btn-danger')
+            .html('<i class="fa fa-minus"></i>');
+    }).on('click', '.btn-remove', function(e) {
+        $(this).parents('.entry:first').remove();
+        $('.tenants-form .entry:first .input-field').removeClass('col-md-offset-3 col-sm-offset-3');
+        e.preventDefault();
+        return false;
+    });
+  });
+
+  $(document).ready(function(){
+    $('#start_date').datetimepicker({
+      format: 'YYYY-MM-DD'
+    });
+    $('#end_date').datetimepicker({
+      format: 'YYYY-MM-DD'
+    });
+  });

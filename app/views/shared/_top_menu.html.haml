@@ -1,0 +1,38 @@
+.top_nav
+  .nav_menu
+    %nav{:role => "navigation"}
+      .nav.toggle
+        %a#menu_toggle
+          %i.fa.fa-bars
+      %ul.nav.navbar-nav.navbar-right
+        %li
+          %a.user-profile.dropdown-toggle{"aria-expanded" => "false", "data-toggle" => "dropdown", :href => "javascript:;"}
+            = image_tag avatar_url, size: "34x34"
+            = current_user.username
+            %span.fa.fa-angle-down
+          %ul.dropdown-menu.dropdown-usermenu.pull-right
+            %li
+              %a{:href => edit_user_registration_path}
+                %span Settings
+            %li
+              %a{:href => destroy_user_session_path, "data-method" => "delete"}
+                %i.fa.fa-sign-out.pull-right
+                Log Out
+        %li.dropdown{:role => "presentation"}
+          %a.dropdown-toggle.info-number{"aria-expanded" => "false", "data-toggle" => "dropdown", :href => "javascript:;"}
+            %i.fa.fa-bell-o
+            - unless @endings.empty?
+              %span.badge.bg-orange= @endings.size
+          - unless @endings.empty?
+            %ul#menu1.dropdown-menu.list-unstyled.msg_list{:role => "menu"}
+              - @endings.each do |ending|
+                %li
+                  %a{:href => ending_path(ending)}
+                    %span
+                      %span.text-left= "#{ending.class} #{ending.name}"
+                      %span.time= "expire in #{distance_of_time_in_words_to_now(ending.expiry_date)}"
+              %li
+                .text-center
+                  %a{:href => root_path}
+                    %strong See All Items
+                    %i.fa.fa-angle-right

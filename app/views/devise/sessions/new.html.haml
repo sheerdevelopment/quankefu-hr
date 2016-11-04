@@ -1,0 +1,36 @@
+- provide :body_class, "login"
+
+%div
+  .login_wrapper
+    - flash.each do |name, msg|
+      = content_tag :div, msg, :id => "flash_#{name}" if msg.is_a?(String)
+
+    .animate.form.login_form
+      %section.login_content
+        %form#new_user.new_user{"accept-charset" => "UTF-8", :action => user_session_path, :method => "post"}
+          %input{:name => "utf8", :type => "hidden", :value => "✓"}/
+          %input{:name => "authenticity_token", :type => "hidden", :value => form_authenticity_token}/
+
+          %h1 Login Form
+
+          %div
+            %input.form-control{:placeholder => "Email", :required => "", :type => "email", :name => "user[email]", :id => "user_email"}/
+          %div
+            %input.form-control{:placeholder => "Password", :required => "", :type => "password", :name => "user[password]", :id => "user_password"}/
+          %div
+            .checkbox
+              %label
+                %input{:type => "checkbox", :name => "user[remember_me]"}/
+                Remember me
+          .clearfix
+          .separator
+            %p.change_link
+              New to site?
+              %a.to_register{:href => new_user_registration_path} Create Account
+            .clearfix
+            %br/
+            %div
+              %h1
+                = image_tag "logo.png", size: "34x34"
+                Champs
+              %p ©2016 All Rights Reserved. SHEERDEVELOPMENT
