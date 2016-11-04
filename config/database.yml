@@ -7,21 +7,21 @@
 default: &default
   adapter: postgresql
   encoding: utf8
-  database: champs
+  database: slim_hr
   pool: 5
   timeout: 5000
 
 development:
   <<: *default
-  database: champs_landlord_dev
+  database: slim_hr_dev
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: champs_landlord_test
+  database: slim_hr_test
 
 production:
   <<: *default
-  database: champs_landlord_production
+  database: slim_hr_production

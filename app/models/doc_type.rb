@@ -1,2 +1,0 @@
-class DocType < ApplicationRecord
-end
