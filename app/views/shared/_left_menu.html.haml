@@ -27,14 +27,14 @@
               %li
                 %a{:href => root_path} Summary
 
-          %li{:class => ("active" if controller_name == "registrations")}
+          %li{:class => ("active" if controller_name == "absence")}
             %a
               %i.fa.fa-calendar-check-o
               Absences
               %span.fa.fa-chevron-down
             %ul.nav.child_menu
               %li
-                %a{:href => edit_user_registration_path} Request an absence
+                %a{:href => new_absence_path} Request an absence
 
           %li{:class => ("active" if controller_name == "registrations")}
             %a

@@ -7,6 +7,7 @@ class CreateAbsences < ActiveRecord::Migration[5.0]
       t.integer :days, limit: 1
       t.string :comments
       t.references :absence_status, foreign_key: true
+      t.references :user, foreign_key: true
 
       t.timestamps
     end

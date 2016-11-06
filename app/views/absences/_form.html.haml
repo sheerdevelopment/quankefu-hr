@@ -1,0 +1,58 @@
+.right_col{:role => "main"}
+  %div
+    .page-title
+      .title_left
+        %h3= title
+      .clearfix
+
+      .row
+        .col-md-12.col-sm-12.col-xs-12
+          .x_panel
+            .x_content
+              %br/
+              = form_for(@absence, html: { class: "form-horizontal form-label-left" }) do |f|
+                = render "shared/error_messages", object: @absence
+
+                .form-group
+                  %label.control-label.col-md-3.col-sm-3.col-xs-12{:for => "start"}
+                    Start time
+                    %span.required *
+                  .col-md-3.col-sm-3.col-xs-12
+                    #start.input-group
+                      %input.form-control.col-md-7.col-xs-12{:type => "text", :name => "absence[start]", :value => @absence.try(:start).try(:strftime, "%F")}/
+                      %span.input-group-addon
+                        %i.fa.fa-calendar
+
+                .form-group
+                  %label.control-label.col-md-3.col-sm-3.col-xs-12{:for => "end"}
+                    End time
+                    %span.required *
+                  .col-md-3.col-sm-3.col-xs-12
+                    #end.input-group
+                      %input.form-control.col-md-7.col-xs-12{:type => "text", :name => "absence[end]", :value => @absence.try(:end).try(:strftime, "%F")}/
+                      %span.input-group-addon
+                        %i.fa.fa-calendar
+
+                .form-group
+                  %label.control-label.col-md-3.col-sm-3.col-xs-12{:for => "comments"}
+                    Comments
+                  .entry
+                    .col-md-6.col-sm-6.col-xs-6.input-field
+                      %textarea.form-control.col-md-7.col-xs-12{:comments => "absence[comments]", :type => "text", :rows => 5}= @absence.comments
+
+                .ln_solid
+                .form-group
+                  .col-md-6.col-sm-6.col-xs-12.col-md-offset-3
+                    %button.btn.btn-success{:type => "submit"} Submit
+
+= javascript_include_tag "bootstrap-datetimepicker.min"
+
+:javascript
+  $(document).ready(function(){
+    $('#start').datetimepicker({
+      format: 'YYYY-MM-DD'
+    });
+    $('#end').datetimepicker({
+      format: 'YYYY-MM-DD'
+    });
+  });
