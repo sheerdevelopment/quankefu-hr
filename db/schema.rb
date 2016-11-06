@@ -10,10 +10,53 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160922173924) do
+ActiveRecord::Schema.define(version: 20161106164053) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "absence_status_translations", force: :cascade do |t|
+    t.integer  "absence_status_id", null: false
+    t.string   "locale",            null: false
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.string   "name",              null: false
+    t.index ["absence_status_id"], name: "index_absence_status_translations_on_absence_status_id", using: :btree
+    t.index ["locale"], name: "index_absence_status_translations_on_locale", using: :btree
+  end
+
+  create_table "absence_statuses", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "absence_type_translations", force: :cascade do |t|
+    t.integer  "absence_type_id", null: false
+    t.string   "locale",          null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.string   "name",            null: false
+    t.index ["absence_type_id"], name: "index_absence_type_translations_on_absence_type_id", using: :btree
+    t.index ["locale"], name: "index_absence_type_translations_on_locale", using: :btree
+  end
+
+  create_table "absence_types", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "absences", force: :cascade do |t|
+    t.integer  "absence_type_id"
+    t.datetime "start"
+    t.datetime "end"
+    t.integer  "days",              limit: 2
+    t.string   "comments"
+    t.integer  "absence_status_id"
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.index ["absence_status_id"], name: "index_absences_on_absence_status_id", using: :btree
+    t.index ["absence_type_id"], name: "index_absences_on_absence_type_id", using: :btree
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -39,4 +82,6 @@ ActiveRecord::Schema.define(version: 20160922173924) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
+  add_foreign_key "absences", "absence_statuses"
+  add_foreign_key "absences", "absence_types"
 end
