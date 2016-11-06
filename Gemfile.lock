@@ -5,6 +5,15 @@ GIT
     pundit (1.1.0)
       activesupport (>= 3.0.0)
 
+GIT
+  remote: https://github.com/globalize/globalize
+  revision: abe7786f4cc7edeafbfdda2863c6d17ca7e744d0
+  specs:
+    globalize (5.1.0)
+      activemodel (>= 4.2, < 5.1)
+      activerecord (>= 4.2, < 5.1)
+      request_store (~> 1.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -36,6 +45,11 @@ GEM
       globalid (>= 0.3.6)
     activemodel (5.0.0.1)
       activesupport (= 5.0.0.1)
+    activemodel-serializers-xml (1.0.1)
+      activemodel (> 5.x)
+      activerecord (> 5.x)
+      activesupport (> 5.x)
+      builder (~> 3.1)
     activerecord (5.0.0.1)
       activemodel (= 5.0.0.1)
       activesupport (= 5.0.0.1)
@@ -162,6 +176,7 @@ GEM
     rb-fsevent (0.9.7)
     rb-inotify (0.9.7)
       ffi (>= 0.5.0)
+    request_store (1.3.1)
     responders (2.3.0)
       railties (>= 4.2.0, < 5.1)
     ruby_parser (3.8.2)
@@ -210,11 +225,13 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  activemodel-serializers-xml
   bootstrap-sass
   byebug
   coffee-rails (~> 4.2)
   devise
   font-awesome-rails
+  globalize!
   haml-rails
   jbuilder (~> 2.5)
   jquery-rails
@@ -235,4 +252,4 @@ DEPENDENCIES
   will_paginate-bootstrap
 
 BUNDLED WITH
-   1.12.5
+   1.13.6

@@ -12,12 +12,15 @@ gem "font-awesome-rails"
 gem "bootstrap-sass"
 gem "pg"
 gem "devise"
-gem "pundit", :git => "https://github.com/elabs/pundit.git"
+gem "pundit", git: "https://github.com/elabs/pundit.git"
 gem "haml-rails"
 gem "paperclip", "~> 5.0.0"
 gem "momentjs-rails"
 gem "will_paginate"
 gem "will_paginate-bootstrap"
+
+gem "globalize", git: "https://github.com/globalize/globalize"
+gem "activemodel-serializers-xml"
 
 group :development, :test do
   gem "byebug", platform: :mri
