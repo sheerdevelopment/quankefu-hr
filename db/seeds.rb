@@ -1,14 +1,21 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+{
+  "holiday" => "假日",
+  "sick leave" => "病假",
+  "public holiday" => "公众假日",
+  "compensation" => "补假"
+}.each do |en, cn|
+  type = AbsenceType.find_or_initialize_by(:name => en)
+  Globalize.with_locale(:"zh-CN") { type.name = cn }
+  type.save
+end
 
-[
-  "Tenancy Agreement", "Deposit Certificate", "EPC",
-  "Gas Certificate", "Other documents"
-].each do |name|
-  DocType.create(:name => name)
+{
+  "pending" => "待定",
+  "approved" => "已批准",
+  "rejected" => "已拒绝",
+  "cancelled" => "已取消"
+}.each do |en, cn|
+  type = AbsenceStatus.find_or_initialize_by(:name => en)
+  Globalize.with_locale(:"zh-CN") { type.name = cn }
+  type.save
 end
