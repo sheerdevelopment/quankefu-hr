@@ -18,21 +18,3 @@
               %a{:href => destroy_user_session_path, "data-method" => "delete"}
                 %i.fa.fa-sign-out.pull-right
                 Log Out
-        %li.dropdown{:role => "presentation"}
-          %a.dropdown-toggle.info-number{"aria-expanded" => "false", "data-toggle" => "dropdown", :href => "javascript:;"}
-            %i.fa.fa-bell-o
-            - unless @endings.empty?
-              %span.badge.bg-orange= @endings.size
-          - unless @endings.empty?
-            %ul#menu1.dropdown-menu.list-unstyled.msg_list{:role => "menu"}
-              - @endings.each do |ending|
-                %li
-                  %a{:href => ending_path(ending)}
-                    %span
-                      %span.text-left= "#{ending.class} #{ending.name}"
-                      %span.time= "expire in #{distance_of_time_in_words_to_now(ending.expiry_date)}"
-              %li
-                .text-center
-                  %a{:href => root_path}
-                    %strong See All Items
-                    %i.fa.fa-angle-right
