@@ -21,7 +21,7 @@
                     .col-md-6.col-sm-6.col-xs-6.input-field
                       - @absence_types.each do |absence_type|
                         %label.radio-inline
-                          %input{:name => "absence[type]", :type => "radio", :value => absence_type.id, :checked => absence_type == @absence.type}>= absence_type.name
+                          %input{:name => "absence[type]", :type => "radio", :value => absence_type.id, :checked => absence_type == @absence.type, :required => ""}>= absence_type.name
 
                 .form-group
                   %label.control-label.col-md-3.col-sm-3.col-xs-12{:for => "start"}
@@ -29,7 +29,7 @@
                     %span.required *
                   .col-md-3.col-sm-3.col-xs-12
                     #start.input-group
-                      %input.form-control.col-md-7.col-xs-12{:type => "text", :name => "absence[start]", :value => @absence.try(:start).try(:strftime, "%F")}/
+                      %input.form-control.col-md-7.col-xs-12{:type => "text", :name => "absence[start]", :value => @absence.try(:start).try(:strftime, "%F"), :required => ""}/
                       %span.input-group-addon
                         %i.fa.fa-calendar
 
@@ -39,7 +39,7 @@
                     %span.required *
                   .col-md-3.col-sm-3.col-xs-12
                     #end.input-group
-                      %input.form-control.col-md-7.col-xs-12{:type => "text", :name => "absence[end]", :value => @absence.try(:end).try(:strftime, "%F")}/
+                      %input.form-control.col-md-7.col-xs-12{:type => "text", :name => "absence[end]", :value => @absence.try(:end).try(:strftime, "%F"), :required => ""}/
                       %span.input-group-addon
                         %i.fa.fa-calendar
 
@@ -48,7 +48,7 @@
                     Comments
                   .entry
                     .col-md-6.col-sm-6.col-xs-6.input-field
-                      %textarea.form-control.col-md-7.col-xs-12{:comments => "absence[comments]", :type => "text", :rows => 5}= @absence.comments
+                      %textarea.form-control.col-md-7.col-xs-12{:comments => "absence[comments]", :type => "text", :rows => 5, :placeholder => "Optional"}= @absence.comments
 
                 .ln_solid
                 .form-group
@@ -59,10 +59,22 @@
 
 :javascript
   $(document).ready(function(){
-    $('#start').datetimepicker({
-      format: 'YYYY-MM-DD'
+    var startPicker = $('#start');
+    var endPicker = $('#end');
+
+    startPicker.datetimepicker({
+      format: 'YYYY-MM-DD h:mm A',
+      useCurrent: false
     });
-    $('#end').datetimepicker({
-      format: 'YYYY-MM-DD'
+
+    endPicker.datetimepicker({
+      format: 'YYYY-MM-DD h:mm A',
+      useCurrent: false
     });
+
+    startPicker.on('dp.change', function (e) {
+      endPicker.data('DateTimePicker').minDate(e.date);
+      endPicker.datetimepicker('show');
+    });
+
   });
