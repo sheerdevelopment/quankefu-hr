@@ -21,7 +21,7 @@
                     .col-md-6.col-sm-6.col-xs-6.input-field
                       - @absence_types.each do |absence_type|
                         %label.radio-inline
-                          %input{:name => "absence[type]", :type => "radio", :value => absence_type.id, :checked => absence_type == @absence.type, :required => ""}>= absence_type.name
+                          %input{:name => "absence[absence_type_id]", :type => "radio", :value => absence_type.id, :checked => absence_type == @absence.type, :required => ""}>= absence_type.name
 
                 .form-group
                   %label.control-label.col-md-3.col-sm-3.col-xs-12{:for => "start"}
