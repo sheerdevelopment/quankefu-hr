@@ -15,7 +15,7 @@ end
   "rejected" => "已拒绝",
   "cancelled" => "已取消"
 }.each do |en, cn|
-  type = AbsenceStatus.find_or_initialize_by(:name => en)
-  Globalize.with_locale(:"zh-CN") { type.name = cn }
-  type.save
+  status = AbsenceStatus.find_or_initialize_by(:name => en)
+  Globalize.with_locale(:"zh-CN") { status.name = cn }
+  status.save
 end

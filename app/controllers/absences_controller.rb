@@ -1,5 +1,6 @@
 class AbsencesController < ApplicationController
   before_action :set_absence_types, only: [:new, :edit]
+
   def show
   end
 
