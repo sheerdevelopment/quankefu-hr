@@ -6,6 +6,7 @@ class Absence < ApplicationRecord
   before_save :cal_days
 
   alias :type :absence_type
+  alias :status :absence_status
 
   SECONDS_A_DAY = 60 * 60 * 24
   def cal_days

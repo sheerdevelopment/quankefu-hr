@@ -17,27 +17,6 @@
                 = devise_error_messages!
 
                 .form-group
-                  %label.control-label.col-md-3.col-sm-3.col-xs-12{:for => "first_name"}
-                    First name
-                  .col-md-6.col-sm-6.col-xs-12
-                    %input#first_name.form-control.col-md-7.col-xs-12{:type => "text", :name => "user[first_name]", :id => "user_first_name", :value => current_user.first_name}/
-                .form-group
-                  %label.control-label.col-md-3.col-sm-3.col-xs-12{:for => "last_name"}
-                    Last name
-                  .col-md-6.col-sm-6.col-xs-12
-                    %input#last_name.form-control.col-md-7.col-xs-12{:type => "text", :name => "user[last_name]", :id => "user_last_name", :value => current_user.last_name}/
-                .form-group
-                  %label.control-label.col-md-3.col-sm-3.col-xs-12{:for => "address"}
-                    Address
-                  .col-md-6.col-sm-6.col-xs-12
-                    %input#address.form-control.col-md-7.col-xs-12{:type => "text", :name => "user[address]", :id => "user_address", :value => current_user.address}/
-                .form-group
-                  %label.control-label.col-md-3.col-sm-3.col-xs-12{:for => "avatar"}
-                    Avatar
-                  .col-md-6.col-sm-6.col-xs-12
-                    = image_tag avatar_url
-                    %input#avatar{:type => "file", :name => "user[avatar]", :id => "user_avatar"}/
-                .form-group
                   %label.control-label.col-md-3.col-sm-3.col-xs-12{:for => "user_password"}
                     New password
                   .col-md-6.col-sm-6.col-xs-12

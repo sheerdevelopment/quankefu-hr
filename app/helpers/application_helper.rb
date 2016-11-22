@@ -9,6 +9,6 @@ module ApplicationHelper
   end
 
   def avatar_url
-    current_user.avatar.present? ? current_user.avatar.url(:medium) : "avatar_missing.png"
+    "avatar_missing.png"
   end
 end

@@ -9,10 +9,8 @@ class ApplicationController < ActionController::Base
 
   protected
 
-  SIGNUP_ATTRS = %i(first_name last_name avatar email password
-                    password_confirmation remember_me address)
-  UPDATE_ATTRS = %i(first_name last_name avatar password password_confirmation
-                    current_password address)
+  SIGNUP_ATTRS = %i(email password password_confirmation remember_me)
+  UPDATE_ATTRS = %i(password password_confirmation current_password)
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: SIGNUP_ATTRS)
     devise_parameter_sanitizer.permit(:account_update, keys: UPDATE_ATTRS)

@@ -1,10 +1,13 @@
 class AbsencesController < ApplicationController
+  include SharedConcepts
+
   before_action :set_absence_types, only: [:new, :edit]
 
   def show
   end
 
   def index
+    @absences = Absence.includes(ABSENCE_PRELOAD_FEILDS).paginate(page: params[:page])
   end
 
   def edit
