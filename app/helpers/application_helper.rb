@@ -6,4 +6,8 @@ module ApplicationHelper
   def avatar_url
     "avatar_missing.png"
   end
+
+  def local_time(record)
+    record.localtime.strftime("%Y-%m-%d %H:%M:%S")
+  end
 end

@@ -30,9 +30,11 @@
                 %th Start date
                 %th End date
                 %th Days
+                %th Comments
                 %th Created at
                 - if current_user.admin?
-                  %th Edit
+                  %th Actions
+
             %tbody
               - @absences.each do |absence|
                 %tr
@@ -40,15 +42,17 @@
                     .label{class: "label-#{label_colour(absence)}"}
                       = absence.status.name.titleize
                   %td= absence.type.name.titleize
-                  %td= absence.start.localtime.strftime("%Y-%m-%d %H:%M:%S")
-                  %td= absence.end.localtime.strftime("%Y-%m-%d %H:%M:%S")
+                  %td= local_time(absence.start)
+                  %td= local_time(absence.end)
                   %td= absence.days
-                  %td= absence.created_at.localtime.strftime("%Y-%m-%d %H:%M:%S")
+                  %td= absence.comments
+                  %td= local_time(absence.created_at)
                   - if current_user.admin?
                     %td
                       %a.btn.btn-info.btn-xs{:href => edit_absence_path(absence)}
                         %i.fa.fa-pencil
                         Edit
+                      = link_to "<i class='fa fa-trash-o'></i> Delete ".html_safe, absence_path(absence), method: :delete, data: { confirm: "Are you sure to delete?" }, class: "btn btn-danger btn-xs"
 
     .col-md-12.col-sm-12.col-xs-12
       = will_paginate @absences, renderer: BootstrapPagination::Rails
