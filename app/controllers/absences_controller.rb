@@ -11,6 +11,7 @@ class AbsencesController < ApplicationController
   end
 
   def edit
+    @absence = Absence.find(params[:id])
   end
 
   def new
@@ -25,6 +26,16 @@ class AbsencesController < ApplicationController
     else
       set_absence_types
       render :new
+    end
+  end
+
+  def update
+    @absence = Absence.find(params[:id])
+    if @absence.update_attributes(update_params)
+      flash[:success] = "Absence request is cancelled."
+      redirect_to absences_path
+    else
+      render :edit
     end
   end
 

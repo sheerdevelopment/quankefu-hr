@@ -36,8 +36,8 @@
             %tbody
               - @absences.each do |absence|
                 %tr
-                  %td= absence.status.name
-                  %td= absence.type.name
+                  %td= absence.status.name.titleize
+                  %td= absence.type.name.titleize
                   %td= absence.start.localtime.strftime("%Y-%m-%d %H:%M:%S")
                   %td= absence.end.localtime.strftime("%Y-%m-%d %H:%M:%S")
                   %td= absence.days

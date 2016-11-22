@@ -49,12 +49,12 @@ ActiveRecord::Schema.define(version: 20161122114446) do
     t.integer  "absence_type_id"
     t.datetime "start"
     t.datetime "end"
-    t.integer  "days",              limit: 2
+    t.float    "days"
     t.string   "comments"
     t.integer  "absence_status_id"
     t.integer  "user_id"
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
     t.index ["absence_status_id"], name: "index_absences_on_absence_status_id", using: :btree
     t.index ["absence_type_id"], name: "index_absences_on_absence_type_id", using: :btree
     t.index ["user_id"], name: "index_absences_on_user_id", using: :btree
@@ -91,6 +91,7 @@ ActiveRecord::Schema.define(version: 20161122114446) do
     t.integer  "user_role_id",           default: 3
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+    t.index ["user_role_id"], name: "index_users_on_user_role_id", using: :btree
   end
 
   add_foreign_key "absences", "absence_statuses"
