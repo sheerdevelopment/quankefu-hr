@@ -34,6 +34,8 @@
               %span.fa.fa-chevron-down
             %ul.nav.child_menu
               %li
+                %a{:href => absences_path} All
+              %li
                 %a{:href => new_absence_path} Request an absence
 
           %li{:class => ("active" if controller_name == "registrations")}
