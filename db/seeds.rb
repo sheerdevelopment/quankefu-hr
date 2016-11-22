@@ -19,3 +19,13 @@ end
   Globalize.with_locale(:"zh-CN") { status.name = cn }
   status.save
 end
+
+{
+  "admin" => "管理员",
+  "manager" => "经理",
+  "employee" => "员工"
+}.each do |en, cn|
+  role = UserRole.find_or_initialize_by(:name => en)
+  Globalize.with_locale(:"zh-CN") { role.name = cn }
+  role.save
+end

@@ -1,12 +1,9 @@
 class Absence < ApplicationRecord
-  belongs_to :absence_type
-  belongs_to :absence_status
+  belongs_to :type, class_name: "AbsenceType", foreign_key: :absence_type_id
+  belongs_to :status, class_name: "AbsenceStatus", foreign_key: :absence_status_id
   belongs_to :user
 
   before_save :cal_days
-
-  alias :type :absence_type
-  alias :status :absence_status
 
   SECONDS_A_DAY = 60 * 60 * 24
   def cal_days
