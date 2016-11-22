@@ -36,7 +36,9 @@
             %tbody
               - @absences.each do |absence|
                 %tr
-                  %td= absence.status.name.titleize
+                  %td
+                    .label{class: "label-#{label_colour(absence)}"}
+                      = absence.status.name.titleize
                   %td= absence.type.name.titleize
                   %td= absence.start.localtime.strftime("%Y-%m-%d %H:%M:%S")
                   %td= absence.end.localtime.strftime("%Y-%m-%d %H:%M:%S")
