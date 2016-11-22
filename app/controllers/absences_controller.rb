@@ -39,6 +39,14 @@ class AbsencesController < ApplicationController
     end
   end
 
+  def admin_action
+    @absence = Absence.find(params[:absence_id])
+    if @absence.update_attributes(absence_status_id: params[:status])
+      flash[:success] = "Absence is updated successfully."
+    end
+    redirect_to absences_path
+  end
+
   private
 
   def set_absence_types

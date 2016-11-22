@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  resources :absences
+  resources :absences do
+    post "/admin_action" => "absences#admin_action"
+  end
 
   devise_for :users,
     path: "",

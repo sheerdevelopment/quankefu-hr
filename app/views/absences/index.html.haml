@@ -31,7 +31,6 @@
                 %th End date
                 %th Days
                 %th Comments
-                %th Created at
                 - if current_user.admin?
                   %th Actions
 
@@ -46,13 +45,14 @@
                   %td= local_time(absence.end)
                   %td= absence.days
                   %td= absence.comments
-                  %td= local_time(absence.created_at)
                   - if current_user.admin?
                     %td
                       %a.btn.btn-info.btn-xs{:href => edit_absence_path(absence)}
                         %i.fa.fa-pencil
                         Edit
-                      = link_to "<i class='fa fa-trash-o'></i> Delete ".html_safe, absence_path(absence), method: :delete, data: { confirm: "Are you sure to delete?" }, class: "btn btn-danger btn-xs"
+                      = link_to "<i class='fa fa-check'></i> Approve ".html_safe, absence_admin_action_path(absence, status: AbsenceStatus::APPROVED), method: :post, data: { confirm: "Are you sure to approve?" }, class: "btn btn-success btn-xs"
+                      = link_to "<i class='fa fa-times'></i> Cancel ".html_safe, absence_admin_action_path(absence, status: AbsenceStatus::CANCELLED), method: :post, data: { confirm: "Are you sure to cancel?" }, class: "btn btn-warning btn-xs"
+                      = link_to "<i class='fa fa-ban'></i> Reject ".html_safe, absence_admin_action_path(absence, status: AbsenceStatus::REJECTED), method: :post, data: { confirm: "Are you sure to reject?" }, class: "btn btn-danger btn-xs"
 
     .col-md-12.col-sm-12.col-xs-12
       = will_paginate @absences, renderer: BootstrapPagination::Rails

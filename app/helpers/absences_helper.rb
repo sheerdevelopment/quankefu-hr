@@ -7,6 +7,6 @@ module AbsencesHelper
   }
 
   def label_colour(absence)
-    STATUS_COLOURS[absence.id]
+    STATUS_COLOURS[absence.status.id]
   end
 end
