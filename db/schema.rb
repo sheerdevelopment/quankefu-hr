@@ -88,6 +88,7 @@ ActiveRecord::Schema.define(version: 20161125000011) do
     t.string   "middle_name",   limit: 100
     t.string   "last_name",     limit: 100
     t.date     "dob"
+    t.string   "mobile",        limit: 100
     t.string   "title",         limit: 100
     t.integer  "gender_id"
     t.datetime "created_at",                null: false

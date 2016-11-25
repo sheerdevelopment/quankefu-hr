@@ -4,7 +4,7 @@
   %div
     .page-title
       .title_left
-        %h3= "Hi, #{@employee.full_name}"
+        %h3= "Hi, #{@employee.username}"
       .clearfix
 
       .row
@@ -15,22 +15,51 @@
               = form_for(@employee, html: { class: "form-horizontal form-label-left" }) do |f|
                 = render "shared/error_messages", object: @employee
 
-                - %i(first_name middle_name last_name title).each do |field|
+                %h4= t(:profile)
+                .ln_solid
+                - %i(first_name middle_name last_name).each do |field|
                   .form-group
-                    %label.control-label.col-md-3.col-sm-3.col-xs-12{:for => "start"}
-                      = field
+                    %label.control-label.col-md-3.col-sm-3.col-xs-12{:for => field}
+                      = t(field)
+                    .col-md-3.col-sm-3.col-xs-12
+                      %input.form-control.col-md-7.col-xs-12{:type => "text", :name => "employee[#{field}]", :value => @employee.public_send(field)}/
+                .form-group
+                  %label.control-label.col-md-3.col-sm-3.col-xs-12{:for => "dob"}
+                    = t(:dob)
+                  .col-md-3.col-sm-3.col-xs-12
+                    %input.form-control.col-md-7.col-xs-12{:type => "text", :name => "employee[dob]", :value => @employee.dob}/
+
+                .form-group
+                  %label.control-label.col-md-3.col-sm-3.col-xs-12{:for => "gender"}
+                    = t(:gender)
+                  .col-md-3.col-sm-3.col-xs-12
+                    .radio
+                      Bar
+                      .iradio_flat-green
+                        %input.flat{:name => "iCheck", :type => "radio"}/
+                        %ins.iCheck-helper
+
+                %h4= t(:contact)
+                .ln_solid
+                - %i(line1 line2 county city country postcode mobile).each do |field|
+                  .form-group
+                    %label.control-label.col-md-3.col-sm-3.col-xs-12{:for => field}
+                      = t(field)
                     .col-md-3.col-sm-3.col-xs-12
                       %input.form-control.col-md-7.col-xs-12{:type => "text", :name => "employee[#{field}]", :value => @employee.public_send(field)}/
 
+                %h4= t(:company_profile)
+                .ln_solid
                 .form-group
-                  %label.control-label.col-md-3.col-sm-3.col-xs-12{:for => "end"}
-                    End time
-                    %span.required *
+                  %label.control-label.col-md-3.col-sm-3.col-xs-12{:for => "title"}
+                    = t(:title)
                   .col-md-3.col-sm-3.col-xs-12
-                    #end.input-group
-                      %input.form-control.col-md-7.col-xs-12{:type => "text", :name => "employee[end]", :value => @employee.try(:end).try(:strftime, "%F"), :required => ""}/
-                      %span.input-group-addon
-                        %i.fa.fa-calendar
+                    %input.form-control.col-md-7.col-xs-12{:type => "text", :name => "employee[title]", :value => @employee.title}/
+                .form-group
+                  %label.control-label.col-md-3.col-sm-3.col-xs-12{:for => "department"}
+                    = t(:department)
+                  .col-md-3.col-sm-3.col-xs-12
+                    %input.form-control.col-md-7.col-xs-12{:type => "text", :name => "employee[department_id]", :value => @employee.department.try(:name)}/
 
                 .ln_solid
                 .form-group

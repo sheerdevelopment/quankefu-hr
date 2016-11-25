@@ -13,6 +13,7 @@ class CreateEmployees < ActiveRecord::Migration[5.0]
       t.string :middle_name, limit: 100
       t.string :last_name, limit: 100
       t.date :dob
+      t.string :mobile, limit: 100
       t.string :title, limit: 100
       t.references :gender, foreign_key: true
 
