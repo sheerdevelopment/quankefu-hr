@@ -23,21 +23,27 @@
                       = t(field)
                     .col-md-3.col-sm-3.col-xs-12
                       %input.form-control.col-md-7.col-xs-12{:type => "text", :name => "employee[#{field}]", :value => @employee.public_send(field)}/
+
                 .form-group
-                  %label.control-label.col-md-3.col-sm-3.col-xs-12{:for => "dob"}
+                  %label.control-label.col-md-3.col-sm-3.col-xs-12{:for => "Date of birth"}
                     = t(:dob)
                   .col-md-3.col-sm-3.col-xs-12
-                    %input.form-control.col-md-7.col-xs-12{:type => "text", :name => "employee[dob]", :value => @employee.dob}/
+                    #dob.input-group
+                      %input.form-control.col-md-7.col-xs-12{:type => "text", :name => "employee[dob]", :value => @employee.try(:dob).try(:strftime, "%F")}/
+                      %span.input-group-addon
+                        %i.fa.fa-calendar
 
                 .form-group
                   %label.control-label.col-md-3.col-sm-3.col-xs-12{:for => "gender"}
                     = t(:gender)
                   .col-md-3.col-sm-3.col-xs-12
                     .radio
-                      Bar
-                      .iradio_flat-green
-                        %input.flat{:name => "iCheck", :type => "radio"}/
-                        %ins.iCheck-helper
+                      - @gender_types.each do |gender_type|
+                        = gender_type.name
+                        .iradio_flat-green
+                          %input.flat{:name => "employee[gender_id]", :type => "radio", :value => gender_type.id, :checked => gender_type == @employee.gender}/
+                          %ins.iCheck-helper
+
 
                 %h4= t(:contact)
                 .ln_solid
@@ -59,7 +65,9 @@
                   %label.control-label.col-md-3.col-sm-3.col-xs-12{:for => "department"}
                     = t(:department)
                   .col-md-3.col-sm-3.col-xs-12
-                    %input.form-control.col-md-7.col-xs-12{:type => "text", :name => "employee[department_id]", :value => @employee.department.try(:name)}/
+                    %select.form-control{:name => "employee[department_id]"}
+                      - @departments.each do |department|
+                        %option{:value => department.id, :selected => selected_if(department, @employee.department)}= department.name
 
                 .ln_solid
                 .form-group
@@ -70,37 +78,14 @@
 
 :javascript
   $(document).ready(function(){
-    var startPicker = $('#start');
-    var endPicker = $('#end');
+    var startPicker = $('#dob');
 
     startPicker.datetimepicker({
-      format: 'YYYY-MM-DD h:mm A',
-      useCurrent: false
-    });
-
-    endPicker.datetimepicker({
-      format: 'YYYY-MM-DD h:mm A',
+      format: 'YYYY-MM-DD',
       useCurrent: false
     });
 
     startPicker.click(function(){
       $(this).datetimepicker('show');
-    });
-
-    endPicker.click(function(){
-      $(this).datetimepicker('show');
-    });
-
-    startPicker.on('dp.change', function (e) {
-      endPicker.data('DateTimePicker').minDate(e.date);
-    });
-
-    endPicker.on('dp.change', function (e) {
-      var startDate = startPicker.datetimepicker('date');
-      if (startDate == null) {
-        startPicker.data('DateTimePicker').maxDate(e.date);
-      } else {
-        $('#days').val(daydiff(startDate, e.date));
-      }
     });
   });

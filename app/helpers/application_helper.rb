@@ -14,4 +14,8 @@ module ApplicationHelper
   def active_menu_if(target_controller_name)
     "active".freeze if controller_name == target_controller_name
   end
+
+  def selected_if(option_record, record)
+    "selected".freeze if option_record == record
+  end
 end
