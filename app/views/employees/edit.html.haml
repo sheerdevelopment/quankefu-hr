@@ -1,0 +1,77 @@
+- provide :body_class, "nav-md"
+
+.right_col{:role => "main"}
+  %div
+    .page-title
+      .title_left
+        %h3= "Hi, #{@employee.full_name}"
+      .clearfix
+
+      .row
+        .col-md-12.col-sm-12.col-xs-12
+          .x_panel
+            .x_content
+              %br/
+              = form_for(@employee, html: { class: "form-horizontal form-label-left" }) do |f|
+                = render "shared/error_messages", object: @employee
+
+                - %i(first_name middle_name last_name title).each do |field|
+                  .form-group
+                    %label.control-label.col-md-3.col-sm-3.col-xs-12{:for => "start"}
+                      = field
+                    .col-md-3.col-sm-3.col-xs-12
+                      %input.form-control.col-md-7.col-xs-12{:type => "text", :name => "employee[#{field}]", :value => @employee.public_send(field)}/
+
+                .form-group
+                  %label.control-label.col-md-3.col-sm-3.col-xs-12{:for => "end"}
+                    End time
+                    %span.required *
+                  .col-md-3.col-sm-3.col-xs-12
+                    #end.input-group
+                      %input.form-control.col-md-7.col-xs-12{:type => "text", :name => "employee[end]", :value => @employee.try(:end).try(:strftime, "%F"), :required => ""}/
+                      %span.input-group-addon
+                        %i.fa.fa-calendar
+
+                .ln_solid
+                .form-group
+                  .col-md-6.col-sm-6.col-xs-12.col-md-offset-3
+                    %button.btn.btn-success{:type => "submit"} Submit
+
+= javascript_include_tag "bootstrap-datetimepicker.min"
+
+:javascript
+  $(document).ready(function(){
+    var startPicker = $('#start');
+    var endPicker = $('#end');
+
+    startPicker.datetimepicker({
+      format: 'YYYY-MM-DD h:mm A',
+      useCurrent: false
+    });
+
+    endPicker.datetimepicker({
+      format: 'YYYY-MM-DD h:mm A',
+      useCurrent: false
+    });
+
+    startPicker.click(function(){
+      $(this).datetimepicker('show');
+    });
+
+    endPicker.click(function(){
+      $(this).datetimepicker('show');
+    });
+
+    startPicker.on('dp.change', function (e) {
+      endPicker.data('DateTimePicker').minDate(e.date);
+    });
+
+    endPicker.on('dp.change', function (e) {
+      var startDate = startPicker.datetimepicker('date');
+      if (startDate == null) {
+        startPicker.data('DateTimePicker').maxDate(e.date);
+      } else {
+        $('#days').val(daydiff(startDate, e.date));
+      }
+    });
+  });

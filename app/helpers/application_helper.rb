@@ -10,4 +10,8 @@ module ApplicationHelper
   def local_time(record)
     record.localtime.strftime("%Y-%m-%d %H:%M:%S")
   end
+
+  def active_menu_if(target_controller_name)
+    "active".freeze if controller_name == target_controller_name
+  end
 end

@@ -6,8 +6,17 @@ class User < ApplicationRecord
 
   belongs_to :role, class_name: "UserRole", foreign_key: "user_role_id"
   delegate :admin?, to: :role
+  has_one :employee
+
+  after_create :create_employee_profile
 
   def username
-    email
+    employee.try(:first_name) || email
+  end
+
+  private
+
+  def create_employee_profile
+    Employee.create(department: Department.find_by(name: "Staff"), user: self)
   end
 end

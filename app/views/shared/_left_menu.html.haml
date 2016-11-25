@@ -18,7 +18,7 @@
       .menu_section
         %h3 General
         %ul.nav.side-menu
-          %li{:class => ("active" if controller_name == "static_pages")}
+          %li{:class => active_menu_if("static_pages")}
             %a
               %i.fa.fa-home
               Home
@@ -27,7 +27,7 @@
               %li
                 %a{:href => root_path} Summary
 
-          %li{:class => ("active" if controller_name == "absence")}
+          %li{:class => active_menu_if("absence")}
             %a
               %i.fa.fa-calendar-check-o
               Absences
@@ -38,14 +38,16 @@
               %li
                 %a{:href => new_absence_path} Request an absence
 
-          %li{:class => ("active" if controller_name == "registrations")}
+          %li{:class => active_menu_if("registrations")}
             %a
               %i.fa.fa-wrench
               Settings
               %span.fa.fa-chevron-down
             %ul.nav.child_menu
               %li
-                %a{:href => edit_user_registration_path} Edit profile
+                %a{:href => edit_user_registration_path} Edit account
+              %li
+                %a{:href => edit_employee_path(current_user.employee)} Edit profile
 
       - if current_user.admin?
         .menu_section

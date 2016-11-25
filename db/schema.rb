@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161122114446) do
+ActiveRecord::Schema.define(version: 20161125000011) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -60,6 +60,58 @@ ActiveRecord::Schema.define(version: 20161122114446) do
     t.index ["user_id"], name: "index_absences_on_user_id", using: :btree
   end
 
+  create_table "department_translations", force: :cascade do |t|
+    t.integer  "department_id", null: false
+    t.string   "locale",        null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.string   "name",          null: false
+    t.index ["department_id"], name: "index_department_translations_on_department_id", using: :btree
+    t.index ["locale"], name: "index_department_translations_on_locale", using: :btree
+  end
+
+  create_table "departments", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "employees", force: :cascade do |t|
+    t.string   "postcode",      limit: 50
+    t.string   "city",          limit: 100
+    t.string   "county",        limit: 100
+    t.string   "line1",         limit: 100
+    t.string   "line2",         limit: 100
+    t.string   "country",       limit: 50
+    t.integer  "user_id"
+    t.integer  "department_id"
+    t.string   "first_name",    limit: 100
+    t.string   "middle_name",   limit: 100
+    t.string   "last_name",     limit: 100
+    t.date     "dob"
+    t.string   "title",         limit: 100
+    t.integer  "gender_id"
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.index ["department_id"], name: "index_employees_on_department_id", using: :btree
+    t.index ["gender_id"], name: "index_employees_on_gender_id", using: :btree
+    t.index ["user_id"], name: "index_employees_on_user_id", using: :btree
+  end
+
+  create_table "gender_translations", force: :cascade do |t|
+    t.integer  "gender_id",  null: false
+    t.string   "locale",     null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string   "name",       null: false
+    t.index ["gender_id"], name: "index_gender_translations_on_gender_id", using: :btree
+    t.index ["locale"], name: "index_gender_translations_on_locale", using: :btree
+  end
+
+  create_table "genders", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "user_role_translations", force: :cascade do |t|
     t.integer  "user_role_id", null: false
     t.string   "locale",       null: false
@@ -97,4 +149,7 @@ ActiveRecord::Schema.define(version: 20161122114446) do
   add_foreign_key "absences", "absence_statuses"
   add_foreign_key "absences", "absence_types"
   add_foreign_key "absences", "users"
+  add_foreign_key "employees", "departments"
+  add_foreign_key "employees", "genders"
+  add_foreign_key "employees", "users"
 end

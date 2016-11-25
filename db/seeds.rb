@@ -29,3 +29,28 @@ end
   Globalize.with_locale(:"zh-CN") { role.name = cn }
   role.save
 end
+
+{
+  "Marketing" => "市场",
+  "Human Resources" => "人力资源",
+  "Financial" => "财务",
+  "Purchasing" => "采购",
+  "Sales" => "销售",
+  "IT" => "技术",
+  "Inventory" => "仓库",
+  "Staff" => "员工",
+  "Customer Service" => "客户服务"
+}.each do |en, cn|
+  department = Department.find_or_initialize_by(:name => en)
+  Globalize.with_locale(:"zh-CN") { department.name = cn }
+  department.save
+end
+
+{
+  "male" => "男性",
+  "female" => "女性"
+}.each do |en, cn|
+  gender = Gender.find_or_initialize_by(:name => en)
+  Globalize.with_locale(:"zh-CN") { gender.name = cn }
+  gender.save
+end

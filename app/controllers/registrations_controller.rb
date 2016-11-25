@@ -17,7 +17,7 @@ class RegistrationsController < Devise::RegistrationsController
       sign_in @user, :bypass => true
       redirect_to edit_user_registration_path
     else
-      render "edit"
+      render :edit
     end
   end
 
