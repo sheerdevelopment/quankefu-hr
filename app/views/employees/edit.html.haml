@@ -34,6 +34,13 @@
                         %i.fa.fa-calendar
 
                 .form-group
+                  %label.control-label.col-md-3.col-sm-3.col-xs-12{:for => "avatar"}
+                    Avatar
+                  .col-md-6.col-sm-6.col-xs-12
+                    = image_tag avatar_url
+                    %input#avatar{:type => "file", :name => "employee[avatar]"}/
+
+                .form-group
                   %label.control-label.col-md-3.col-sm-3.col-xs-12{:for => "gender"}
                     = t(:gender)
                   .col-md-3.col-sm-3.col-xs-12
@@ -51,7 +58,7 @@
                   .form-group
                     %label.control-label.col-md-3.col-sm-3.col-xs-12{:for => field}
                       = t(field)
-                    .col-md-3.col-sm-3.col-xs-12
+                    .col-md-4.col-sm-4.col-xs-12
                       %input.form-control.col-md-7.col-xs-12{:type => "text", :name => "employee[#{field}]", :value => @employee.public_send(field)}/
 
                 %h4= t(:company_profile)
@@ -65,9 +72,12 @@
                   %label.control-label.col-md-3.col-sm-3.col-xs-12{:for => "department"}
                     = t(:department)
                   .col-md-3.col-sm-3.col-xs-12
-                    %select.form-control{:name => "employee[department_id]"}
-                      - @departments.each do |department|
-                        %option{:value => department.id, :selected => selected_if(department, @employee.department)}= department.name
+                    - if current_admin?
+                      %select.form-control{:name => "employee[department_id]"}
+                        - @departments.each do |department|
+                          %option{:value => department.id, :selected => selected_if(department, @employee.department)}= department.name
+                    - else
+                      %input.form-control.col-md-7.col-xs-12{:type => "text", :disabled => "", :value => @employee.department.name}/
 
                 .ln_solid
                 .form-group

@@ -3,7 +3,7 @@
     .navbar.nav_title{:style => "border: 0;"}
       %a.site_title{:href => root_path}
         = image_tag "logo.png", size: "34x34"
-        %span Champs
+        %span= t(:company)
     .clearfix
 
     .profile
@@ -27,7 +27,7 @@
               %li
                 %a{:href => root_path} Summary
 
-          %li{:class => active_menu_if("absence")}
+          %li{:class => active_menu_if("absences")}
             %a
               %i.fa.fa-calendar-check-o
               Absences
@@ -37,6 +37,17 @@
                 %a{:href => absences_path} All
               %li
                 %a{:href => new_absence_path} Request an absence
+
+          %li{:class => active_menu_if("diaries")}
+            %a
+              %i.fa.fa-sticky-note-o
+              Diaries
+              %span.fa.fa-chevron-down
+            %ul.nav.child_menu
+              %li
+                %a{:href => diaries_path} All
+              %li
+                %a{:href => new_diary_path} Record a time
 
           %li{:class => active_menu_if("registrations")}
             %a

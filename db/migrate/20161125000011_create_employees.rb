@@ -16,6 +16,7 @@ class CreateEmployees < ActiveRecord::Migration[5.0]
       t.string :mobile, limit: 100
       t.string :title, limit: 100
       t.references :gender, foreign_key: true
+      t.attachment :avatar
 
       t.timestamps
     end

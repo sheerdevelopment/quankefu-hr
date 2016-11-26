@@ -1,0 +1,47 @@
+- provide :body_class, "nav-md"
+
+.right_col{:role => "main"}
+  .row
+    .col-md-12.col-sm-12.col-xs-12
+      = will_paginate @diaries, renderer: BootstrapPagination::Rails
+
+    .col-md-12.col-sm-12.col-xs-12
+      .x_panel
+        .x_title
+          %h2
+            Diaries
+            - if current_admin?
+              %small
+                %a.btn.btn-xs.btn-info{:href => new_diary_path} Add
+          %ul.nav.navbar-right.panel_toolbox
+            %li
+              %a.collapse-link
+                %i.fa.fa-chevron-up
+            %li
+              %a.close-link
+                %i.fa.fa-close
+          .clearfix
+        .x_content
+          %table.table.table-hover
+            %thead
+              %tr
+                %th Start date
+                %th End date
+                %th Hours
+                %th Notes
+                %th Edit
+
+            %tbody
+              - @diaries.each do |diary|
+                %tr
+                  %td= local_time(diary.start)
+                  %td= local_time(diary.end)
+                  %td= diary.hours
+                  %td= diary.notes
+                  %td
+                    %a.btn.btn-info.btn-xs{:href => edit_diary_path(diary)}
+                      %i.fa.fa-pencil
+                      Edit
+
+    .col-md-12.col-sm-12.col-xs-12
+      = will_paginate @diaries, renderer: BootstrapPagination::Rails

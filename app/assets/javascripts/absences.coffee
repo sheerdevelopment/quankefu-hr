@@ -4,3 +4,6 @@
 
 @daydiff = (first, second) ->
   ((second - first) / (1000 * 60 * 60 * 24)).toFixed(1)
+
+@hourdiff = (first, second) ->
+  ((second - first) / (1000 * 60 * 60)).toFixed(1)

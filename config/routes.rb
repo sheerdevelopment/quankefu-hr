@@ -3,6 +3,7 @@ Rails.application.routes.draw do
     post "/admin_action" => "absences#admin_action"
   end
   resources :employees
+  resources :diaries
 
   devise_for :users,
     path: "",

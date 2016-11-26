@@ -1,6 +1,6 @@
 class EmployeesController < ApplicationController
   before_action :set_genders, only: :edit
-  before_action :set_departments, only: :edit
+  before_action :set_departments, only: :edit, if: :current_admin?
 
   def edit
     @employee = Employee.find(params[:id])
@@ -13,7 +13,7 @@ class EmployeesController < ApplicationController
       redirect_to edit_employee_path(@employee)
     else
       set_genders
-      set_departments
+      set_departments if current_admin?
       render :edit
     end
   end

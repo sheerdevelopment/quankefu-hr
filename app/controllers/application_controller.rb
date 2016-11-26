@@ -1,11 +1,15 @@
 class ApplicationController < ActionController::Base
   include Pundit
   protect_from_forgery with: :exception
-
   before_action :authenticate_user!
   before_action :configure_permitted_parameters, if: :devise_controller?
-
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+
+  helper_method :current_admin?
+
+  def current_admin?
+    current_user.admin?
+  end
 
   protected
 
