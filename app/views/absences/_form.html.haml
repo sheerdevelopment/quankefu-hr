@@ -15,7 +15,7 @@
 
                 .form-group
                   %label.control-label.col-md-3.col-sm-3.col-xs-12{:for => "Type"}
-                    Type
+                    = t(:absence_type)
                     %span.required *
                   .entry
                     .col-md-6.col-sm-6.col-xs-6.input-field
@@ -28,7 +28,7 @@
 
                 .form-group
                   %label.control-label.col-md-3.col-sm-3.col-xs-12{:for => "start"}
-                    Start time
+                    = t(:start_time)
                     %span.required *
                   .col-md-3.col-sm-3.col-xs-12
                     #start.input-group
@@ -38,7 +38,7 @@
 
                 .form-group
                   %label.control-label.col-md-3.col-sm-3.col-xs-12{:for => "end"}
-                    End time
+                    = t(:end_time)
                     %span.required *
                   .col-md-3.col-sm-3.col-xs-12
                     #end.input-group
@@ -48,22 +48,22 @@
 
                 .form-group
                   %label.control-label.col-md-3.col-sm-3.col-xs-12{:for => "day"}
-                    Day(s)
+                    = t(:days)
                   .entry
                     .col-md-3.col-sm-3.col-xs-3.input-field
                       %input#days.form-control.col-md-7.col-xs-12{:type => "number", :value => @absence.days, :min => 0, :disabled => "disabled"}/
 
                 .form-group
                   %label.control-label.col-md-3.col-sm-3.col-xs-12{:for => "comments"}
-                    Comments
+                    = t(:comments)
                   .entry
                     .col-md-6.col-sm-6.col-xs-6.input-field
-                      %textarea.form-control.col-md-7.col-xs-12{:name => "absence[comments]", :type => "text", :rows => 5, :placeholder => "Optional"}= @absence.comments
+                      %textarea.form-control.col-md-7.col-xs-12{:name => "absence[comments]", :type => "text", :rows => 5, :placeholder => t(:optional)}= @absence.comments
 
                 .ln_solid
                 .form-group
                   .col-md-6.col-sm-6.col-xs-12.col-md-offset-3
-                    %button.btn.btn-success{:type => "submit"} Submit
+                    %button.btn.btn-success{:type => "submit"}= t(:submit)
 
 = javascript_include_tag "bootstrap-datetimepicker.min"
 

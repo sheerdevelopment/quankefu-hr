@@ -15,7 +15,7 @@
 
                 .form-group
                   %label.control-label.col-md-3.col-sm-3.col-xs-12{:for => "start"}
-                    Start time
+                    = t(:start_time)
                     %span.required *
                   .col-md-3.col-sm-3.col-xs-12
                     #start.input-group
@@ -25,7 +25,7 @@
 
                 .form-group
                   %label.control-label.col-md-3.col-sm-3.col-xs-12{:for => "end"}
-                    End time
+                    = t(:end_time)
                     %span.required *
                   .col-md-3.col-sm-3.col-xs-12
                     #end.input-group
@@ -35,14 +35,14 @@
 
                 .form-group
                   %label.control-label.col-md-3.col-sm-3.col-xs-12{:for => "hours"}
-                    Hours
+                    = t(:hours)
                   .entry
                     .col-md-3.col-sm-3.col-xs-3.input-field
                       %input#hours.form-control.col-md-7.col-xs-12{:type => "number", :value => @diary.hours, :min => 0, :disabled => "disabled"}/
 
                 .form-group
                   %label.control-label.col-md-3.col-sm-3.col-xs-12{:for => "notes"}
-                    Notes
+                    = t(:notes)
                   .entry
                     .col-md-6.col-sm-6.col-xs-6.input-field
                       %textarea.form-control.col-md-7.col-xs-12{:name => "diary[notes]", :type => "text", :rows => 5, :required => ""}= @diary.notes
@@ -50,7 +50,7 @@
                 .ln_solid
                 .form-group
                   .col-md-6.col-sm-6.col-xs-12.col-md-offset-3
-                    %button.btn.btn-success{:type => "submit"} Submit
+                    %button.btn.btn-success{:type => "submit"}= t(:submit)
 
 = javascript_include_tag "bootstrap-datetimepicker.min"
 

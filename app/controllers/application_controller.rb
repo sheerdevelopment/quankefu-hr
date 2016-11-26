@@ -4,11 +4,19 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!
   before_action :configure_permitted_parameters, if: :devise_controller?
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
-
+  before_action :set_locale
   helper_method :current_admin?
 
   def current_admin?
     current_user.admin?
+  end
+
+  def set_locale
+    I18n.locale = params[:lang] || I18n.default_locale
+  end
+
+  def default_url_options(options = {})
+    { lang: I18n.locale == I18n.default_locale ? nil : I18n.locale  }
   end
 
   protected

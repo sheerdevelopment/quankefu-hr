@@ -9,10 +9,7 @@
       .x_panel
         .x_title
           %h2
-            Absences
-            - if current_user.admin?
-              %small
-                %a.btn.btn-xs.btn-info{:href => new_absence_path} Add
+            = t(:absences)
           %ul.nav.navbar-right.panel_toolbox
             %li
               %a.collapse-link
@@ -25,14 +22,15 @@
           %table.table.table-hover
             %thead
               %tr
-                %th Status
-                %th Type
-                %th Start date
-                %th End date
-                %th Days
-                %th Comments
-                - if current_user.admin?
-                  %th Actions
+                %th= t(:absence_status)
+                %th= t(:absence_type)
+                %th= t(:employee)
+                %th= t(:start_time)
+                %th= t(:end_time)
+                %th= t(:days)
+                %th= t(:comments)
+                - if current_admin?
+                  %th= t(:actions)
 
             %tbody
               - @absences.each do |absence|
@@ -41,6 +39,7 @@
                     .label{class: "label-#{label_colour(absence)}"}
                       = absence.status.name.titleize
                   %td= absence.type.name.titleize
+                  %td= absence.user.username
                   %td= local_time(absence.start)
                   %td= local_time(absence.end)
                   %td= absence.days
@@ -49,10 +48,10 @@
                     %td
                       %a.btn.btn-info.btn-xs{:href => edit_absence_path(absence)}
                         %i.fa.fa-pencil
-                        Edit
-                      = link_to "<i class='fa fa-check'></i> Approve ".html_safe, absence_admin_action_path(absence, status: AbsenceStatus::APPROVED), method: :post, data: { confirm: "Are you sure to approve?" }, class: "btn btn-success btn-xs"
-                      = link_to "<i class='fa fa-times'></i> Cancel ".html_safe, absence_admin_action_path(absence, status: AbsenceStatus::CANCELLED), method: :post, data: { confirm: "Are you sure to cancel?" }, class: "btn btn-warning btn-xs"
-                      = link_to "<i class='fa fa-ban'></i> Reject ".html_safe, absence_admin_action_path(absence, status: AbsenceStatus::REJECTED), method: :post, data: { confirm: "Are you sure to reject?" }, class: "btn btn-danger btn-xs"
+                        = t(:edit)
+                      = link_to "<i class='fa fa-check'></i> #{t(:approve)} ".html_safe, absence_admin_action_path(absence, status: AbsenceStatus::APPROVED), method: :post, data: { confirm: "Are you sure to approve?" }, class: "btn btn-success btn-xs"
+                      = link_to "<i class='fa fa-times'></i> #{t(:cancel)} ".html_safe, absence_admin_action_path(absence, status: AbsenceStatus::CANCELLED), method: :post, data: { confirm: "Are you sure to cancel?" }, class: "btn btn-warning btn-xs"
+                      = link_to "<i class='fa fa-ban'></i> #{t(:reject)} ".html_safe, absence_admin_action_path(absence, status: AbsenceStatus::REJECTED), method: :post, data: { confirm: "Are you sure to reject?" }, class: "btn btn-danger btn-xs"
 
     .col-md-12.col-sm-12.col-xs-12
       = will_paginate @absences, renderer: BootstrapPagination::Rails

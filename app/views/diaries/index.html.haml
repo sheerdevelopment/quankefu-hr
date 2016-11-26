@@ -9,10 +9,7 @@
       .x_panel
         .x_title
           %h2
-            Diaries
-            - if current_admin?
-              %small
-                %a.btn.btn-xs.btn-info{:href => new_diary_path} Add
+            = t(:diaries)
           %ul.nav.navbar-right.panel_toolbox
             %li
               %a.collapse-link
@@ -25,11 +22,11 @@
           %table.table.table-hover
             %thead
               %tr
-                %th Start date
-                %th End date
-                %th Hours
-                %th Notes
-                %th Edit
+                %th= t(:start_time)
+                %th= t(:end_time)
+                %th= t(:hours)
+                %th= t(:notes)
+                %th= t(:edit)
 
             %tbody
               - @diaries.each do |diary|
@@ -41,7 +38,7 @@
                   %td
                     %a.btn.btn-info.btn-xs{:href => edit_diary_path(diary)}
                       %i.fa.fa-pencil
-                      Edit
+                      = t(:edit)
 
     .col-md-12.col-sm-12.col-xs-12
       = will_paginate @diaries, renderer: BootstrapPagination::Rails
