@@ -22,7 +22,7 @@
                       .radio
                         - @absence_types.each do |absence_type|
                           .iradio_flat-green
-                            %input.flat{:name => "absence[absence_type_id]", :type => "radio", :value => absence_type.id, :checked => absence_type == @absence.type}/
+                            %input.flat{:name => "absence[absence_type_id]", :type => "radio", :value => absence_type.id, :checked => absence_type == @absence.type, :required => ""}/
                             %ins.iCheck-helper
                           = absence_type.name
 
