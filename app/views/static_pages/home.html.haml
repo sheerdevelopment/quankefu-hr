@@ -1,3 +1,49 @@
 - provide :body_class, "nav-md"
 
-.right_col{:role => "main"}
+.right_col{:role => "main", :style => "min-height: 1264px;"}
+  %div
+    .page-title
+      .title_left
+        %h3 Welcome
+    .clearfix
+
+    .row.top_tiles
+      .animated.flipInY.col-lg-3.col-md-3.col-sm-6.col-xs-12
+        .tile-stats
+          .icon
+            %i.fa.fa-plane
+          .count 179
+          %h3 Taken holidays
+      .animated.flipInY.col-lg-3.col-md-3.col-sm-6.col-xs-12
+        .tile-stats
+          .icon
+            %i.fa.fa-clock-o
+          .count 179
+          %h3 Hours this week
+
+    .row
+      .col-md-12.col-sm-12.col-xs-12
+        .x_panel
+          .x_content
+            .col-md-3.col-sm-3.col-xs-12.profile_left
+              .profile_img
+                / end of image cropping
+                #crop-avatar
+                  = image_tag avatar_url, :class => "img-responsive avatar-view"
+
+              %h3= current_user.username
+              %ul.list-unstyled.user_data
+                %li
+                  %i.fa.fa-map-marker.user-profile-icon
+                  = current_employee.address
+                %li
+                  %i.fa.fa-briefcase.user-profile-icon
+                  = current_employee.title
+                %li
+                  %i.fa.fa-id-card-o.user-profile-icon
+                  = current_employee.title
+
+              %a.btn.btn-success{:href => edit_employee_path(current_employee)}
+                %i.fa.fa-edit.m-right-xs
+                Edit Profile
+              %br/

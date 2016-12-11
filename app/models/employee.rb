@@ -15,4 +15,8 @@ class Employee < ApplicationRecord
   def full_name
     [first_name, middle_name, last_name].compact.join(" ")
   end
+
+  def address
+    [line1, line2, city, county, postcode, country].compact.join(" ")
+  end
 end

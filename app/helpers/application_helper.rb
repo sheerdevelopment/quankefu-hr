@@ -18,4 +18,8 @@ module ApplicationHelper
   def selected_if(option_record, record)
     "selected".freeze if option_record == record
   end
+
+  def current_employee
+    current_user.employee
+  end
 end
