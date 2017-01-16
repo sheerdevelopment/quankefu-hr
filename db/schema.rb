@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161126101439) do
+ActiveRecord::Schema.define(version: 20170116173606) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -77,6 +77,7 @@ ActiveRecord::Schema.define(version: 20161126101439) do
 
   create_table "diaries", force: :cascade do |t|
     t.integer  "employee_id"
+    t.integer  "project_id"
     t.datetime "start"
     t.datetime "end"
     t.text     "notes"
@@ -84,6 +85,7 @@ ActiveRecord::Schema.define(version: 20161126101439) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.index ["employee_id"], name: "index_diaries_on_employee_id", using: :btree
+    t.index ["project_id"], name: "index_diaries_on_project_id", using: :btree
   end
 
   create_table "employees", force: :cascade do |t|
@@ -128,6 +130,31 @@ ActiveRecord::Schema.define(version: 20161126101439) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "project_status_translations", force: :cascade do |t|
+    t.integer  "project_status_id", null: false
+    t.string   "locale",            null: false
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.string   "name",              null: false
+    t.index ["locale"], name: "index_project_status_translations_on_locale", using: :btree
+    t.index ["project_status_id"], name: "index_project_status_translations_on_project_status_id", using: :btree
+  end
+
+  create_table "project_statuses", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "projects", force: :cascade do |t|
+    t.string   "name"
+    t.text     "comment"
+    t.integer  "project_status_id"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.index ["name"], name: "index_projects_on_name", using: :btree
+    t.index ["project_status_id"], name: "index_projects_on_project_status_id", using: :btree
+  end
+
   create_table "user_role_translations", force: :cascade do |t|
     t.integer  "user_role_id", null: false
     t.string   "locale",       null: false
@@ -166,7 +193,9 @@ ActiveRecord::Schema.define(version: 20161126101439) do
   add_foreign_key "absences", "absence_types"
   add_foreign_key "absences", "users"
   add_foreign_key "diaries", "employees"
+  add_foreign_key "diaries", "projects"
   add_foreign_key "employees", "departments"
   add_foreign_key "employees", "genders"
   add_foreign_key "employees", "users"
+  add_foreign_key "projects", "project_statuses"
 end

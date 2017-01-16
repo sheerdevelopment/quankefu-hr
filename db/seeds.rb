@@ -54,3 +54,12 @@ end
   Globalize.with_locale(:"zh-CN") { gender.name = cn }
   gender.save
 end
+
+{
+  "In progress" => "进行中",
+  "Finished" => "已完成"
+}.each do |en, cn|
+  status = ProjectStatus.find_or_initialize_by(:name => en)
+  Globalize.with_locale(:"zh-CN") { status.name = cn }
+  status.save
+end
