@@ -82,6 +82,14 @@
                   %a{:href => diaries_path}= t(:all)
             %li
               %a
+                %i.fa.fa-tasks
+                = t(:projects)
+                %span.fa.fa-chevron-down
+              %ul.nav.child_menu
+                %li
+                  %a{:href => projects_path}= t(:all)
+            %li
+              %a
                 %i.fa.fa-language
                 = t(:language)
                 %span.fa.fa-chevron-down

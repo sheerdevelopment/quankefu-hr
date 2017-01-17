@@ -1,0 +1,44 @@
+- provide :body_class, "nav-md"
+
+.right_col{:role => "main"}
+  .row
+    .col-md-12.col-sm-12.col-xs-12
+      = will_paginate @projects, renderer: BootstrapPagination::Rails
+
+    .col-md-12.col-sm-12.col-xs-12
+      .x_panel
+        .x_title
+          %h2
+            = t(:projects)
+          %ul.nav.navbar-right.panel_toolbox
+            %li
+              %a.collapse-link
+                %i.fa.fa-chevron-up
+            %li
+              %a.close-link
+                %i.fa.fa-close
+          .clearfix
+        .x_content
+          %table.table.table-hover
+            %thead
+              %tr
+                %th= t(:project_name)
+                %th= t(:comments)
+                %th= t(:project_status)
+                %th= t(:start_time)
+                %th= t(:edit)
+
+            %tbody
+              - @projects.each do |project|
+                %tr
+                  %td= project.name
+                  %td= project.comment
+                  %td= project.status.name
+                  %td= local_time(project.created_at)
+                  %td
+                    %a.btn.btn-info.btn-xs{:href => edit_project_path(project)}
+                      %i.fa.fa-pencil
+                      = t(:edit)
+
+    .col-md-12.col-sm-12.col-xs-12
+      = will_paginate @projects, renderer: BootstrapPagination::Rails

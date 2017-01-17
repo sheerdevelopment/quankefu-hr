@@ -54,3 +54,9 @@ zh-CN:
   mobile: "手机号码"
   title: "职称"
   department: "所属部门"
+
+  projects: "项目"
+  project_name: "名称"
+  project_new: "创建新项目"
+  project_status: "项目状态"
+  project_edit: "编辑项目"

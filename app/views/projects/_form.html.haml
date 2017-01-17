@@ -1,0 +1,40 @@
+.right_col{:role => "main"}
+  %div
+    .page-title
+      .title_left
+        %h3= title
+      .clearfix
+
+      .row
+        .col-md-12.col-sm-12.col-xs-12
+          .x_panel
+            .x_content
+              %br/
+              = form_for(@project, html: { class: "form-horizontal form-label-left" }) do |f|
+                = render "shared/error_messages", object: @project
+
+                .form-group
+                  %label.control-label.col-md-3.col-sm-3.col-xs-12{:for => "name"}
+                    = t(:project_name)
+                  .col-md-3.col-sm-3.col-xs-12
+                    %input.form-control.col-md-7.col-xs-12{:placeholder => t(:project_name), :type => "text", :name => "project[name]", :value => @project.name}/
+
+                .form-group
+                  %label.control-label.col-md-3.col-sm-3.col-xs-12{:for => "project_status"}
+                    = t(:project_status)
+                  .col-md-3.col-sm-3.col-xs-12
+                    %select.form-control{:name => "project[project_status_id]"}
+                      - @project_statuses.each do |status|
+                        %option{:value => status.id, :selected => selected_if(status, @project.status)}= status.name
+
+                .form-group
+                  %label.control-label.col-md-3.col-sm-3.col-xs-12{:for => "comments"}
+                    = t(:comments)
+                  .entry
+                    .col-md-6.col-sm-6.col-xs-6.input-field
+                      %textarea.form-control.col-md-7.col-xs-12{:name => "project[comment]", :type => "text", :rows => 5, :required => "", :placeholder => t(:comments)}= @project.comment
+
+                .ln_solid
+                .form-group
+                  .col-md-6.col-sm-6.col-xs-12.col-md-offset-3
+                    %button.btn.btn-success{:type => "submit"}= t(:submit)

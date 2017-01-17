@@ -54,3 +54,9 @@ en:
   mobile: "Mobile"
   title: "Title"
   department: "Department"
+
+  projects: "Projects"
+  project_name: "Name"
+  project_new: "Create new project"
+  project_status: "Project status"
+  project_edit: "Edit a project"

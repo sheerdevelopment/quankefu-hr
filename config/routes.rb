@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   end
   resources :employees
   resources :diaries
+  resources :projects
 
   devise_for :users,
     path: "",
