@@ -60,3 +60,7 @@ zh-CN:
   project_new: "创建新项目"
   project_status: "项目状态"
   project_edit: "编辑项目"
+  add: "添加"
+  in_progress: "进行中"
+  finish: "已完成"
+

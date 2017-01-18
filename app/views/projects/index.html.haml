@@ -10,6 +10,7 @@
         .x_title
           %h2
             = t(:projects)
+            %a.btn.btn-xs.btn-info{href: new_project_path}= t(:add)
           %ul.nav.navbar-right.panel_toolbox
             %li
               %a.collapse-link
@@ -26,7 +27,8 @@
                 %th= t(:comments)
                 %th= t(:project_status)
                 %th= t(:start_time)
-                %th= t(:edit)
+                - if current_admin?
+                  %th= t(:actions)
 
             %tbody
               - @projects.each do |project|
@@ -35,10 +37,13 @@
                   %td= project.comment
                   %td= project.status.name
                   %td= local_time(project.created_at)
-                  %td
-                    %a.btn.btn-info.btn-xs{:href => edit_project_path(project)}
-                      %i.fa.fa-pencil
-                      = t(:edit)
+                  - if current_admin?
+                    %td
+                      %a.btn.btn-info.btn-xs{:href => edit_project_path(project)}
+                        %i.fa.fa-pencil
+                        = t(:edit)
+                      = link_to "<i class='fa fa-check'></i> #{t(:in_progress)} ".html_safe, project_admin_action_path(project, status: ProjectStatus::IN_PROGRESS), method: :post, data: { confirm: "Set project to be in progressing?" }, class: "btn btn-success btn-xs"
+                      = link_to "<i class='fa fa-ban'></i> #{t(:finished)} ".html_safe, project_admin_action_path(project, status: ProjectStatus::FINISHED), method: :post, data: { confirm: "Finish the project?" }, class: "btn btn-danger btn-xs"
 
     .col-md-12.col-sm-12.col-xs-12
       = will_paginate @projects, renderer: BootstrapPagination::Rails

@@ -24,6 +24,7 @@
               %tr
                 %th= t(:start_time)
                 %th= t(:end_time)
+                %th= t(:projects)
                 %th= t(:hours)
                 %th= t(:notes)
                 %th= t(:edit)
@@ -33,6 +34,7 @@
                 %tr
                   %td= local_time(diary.start)
                   %td= local_time(diary.end)
+                  %td= diary.project.name
                   %td= diary.hours
                   %td= diary.notes
                   %td

@@ -1,4 +1,6 @@
 class DiariesController < ApplicationController
+  before_action :set_projects, only: [:new, :edit]
+
   def new
     @diary = Diary.new
   end
@@ -33,7 +35,13 @@ class DiariesController < ApplicationController
 
   private
 
+  def set_projects
+    @projects ||= Rails.cache.fetch("in_progress_projects", :expires_in => 1.day) do
+      Project.where(project_status_id: ProjectStatus::IN_PROGRESS).all
+    end
+  end
+
   def diary_params
-    params.require(:diary).permit(:start, :end, :notes)
+    params.require(:diary).permit(:start, :end, :notes, :project_id)
   end
 end

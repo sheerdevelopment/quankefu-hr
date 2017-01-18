@@ -14,4 +14,5 @@
 //= require bootstrap-sprockets
 //= require jquery_ujs
 //= require moment
+//= require select2.min
 //= require absences

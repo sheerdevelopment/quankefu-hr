@@ -10,6 +10,7 @@ default: &default
   database: slim_hr
   pool: 5
   timeout: 5000
+  host: localhost
 
 development:
   <<: *default

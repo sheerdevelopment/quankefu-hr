@@ -60,3 +60,6 @@ en:
   project_new: "Create new project"
   project_status: "Project status"
   project_edit: "Edit a project"
+  add: "Add"
+  in_progress: "In progress"
+  finish: "Finished"

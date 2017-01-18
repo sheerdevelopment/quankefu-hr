@@ -33,6 +33,14 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def admin_action
+    @project = Project.find(params[:project_id])
+    if @project.update_attributes(project_status_id: params[:status])
+      flash[:success] = "Project is updated successfully."
+    end
+    redirect_to projects_path
+  end
+
   private
 
   def set_project_statuses

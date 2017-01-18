@@ -4,7 +4,9 @@ Rails.application.routes.draw do
   end
   resources :employees
   resources :diaries
-  resources :projects
+  resources :projects do
+    post "/admin_action" => "projects#admin_action"
+  end
 
   devise_for :users,
     path: "",
