@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  include SharedConcepts
+  include SharedConcern
 
   before_action :set_project_statuses, only: [:new, :edit]
 

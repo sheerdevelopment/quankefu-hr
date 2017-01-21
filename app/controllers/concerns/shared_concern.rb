@@ -1,4 +1,4 @@
-module SharedConcepts
+module SharedConcern
   extend ActiveSupport::Concern
 
   ABSENCE_PRELOAD_FIELDS = [

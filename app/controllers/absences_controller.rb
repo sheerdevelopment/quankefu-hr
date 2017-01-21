@@ -1,5 +1,5 @@
 class AbsencesController < ApplicationController
-  include SharedConcepts
+  include SharedConcern
 
   before_action :set_absence_types, only: [:new, :edit]
 

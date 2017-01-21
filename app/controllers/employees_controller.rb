@@ -1,5 +1,6 @@
 class EmployeesController < ApplicationController
-  include SharedConcepts
+  include SharedConcern
+
   before_action :set_genders, only: :edit
   before_action :set_departments, only: :edit, if: :current_admin?
 
