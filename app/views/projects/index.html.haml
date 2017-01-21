@@ -33,7 +33,7 @@
             %tbody
               - @projects.each do |project|
                 %tr
-                  %td= project.name
+                  %td= link_to project.name, project_path(project)
                   %td= project.comment
                   %td= project.status.name
                   %td= local_time(project.created_at)

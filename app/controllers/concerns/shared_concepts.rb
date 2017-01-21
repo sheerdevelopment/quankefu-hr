@@ -8,7 +8,7 @@ module SharedConcepts
 
   PROJECT_PRELOAD_FEILDS = [
     {
-      diaries: [:employee]
+      diaries: [{ employee: [:user] }]
     },
     { status: [:translations] }
   ]

@@ -2,6 +2,7 @@ class Employee < ApplicationRecord
   belongs_to :user
   belongs_to :department
   belongs_to :gender
+  has_many :diaries
 
   delegate :username, to: :user
 
@@ -18,5 +19,9 @@ class Employee < ApplicationRecord
 
   def address
     [line1, line2, city, county, postcode, country].compact.join(" ")
+  end
+
+  def work_hours(start_date = Time.now.beginning_of_week, end_date = Time.now.end_of_week)
+    @work_hours ||= diaries.where("start >= ? AND 'end' <= ?", start_date, end_date).sum(:hours) || 0
   end
 end
