@@ -5,4 +5,11 @@ module SharedConcepts
     { type: [:translations] },
     { status: [:translations] }
   ]
+
+  PROJECT_PRELOAD_FEILDS = [
+    {
+      diaries: [:employee]
+    },
+    { status: [:translations] }
+  ]
 end

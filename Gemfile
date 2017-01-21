@@ -22,6 +22,8 @@ gem "will_paginate-bootstrap"
 gem "globalize", git: "https://github.com/globalize/globalize"
 gem "activemodel-serializers-xml"
 
+gem "faker"
+
 group :development, :test do
   gem "byebug", platform: :mri
 end

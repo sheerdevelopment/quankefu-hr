@@ -1,4 +1,6 @@
 class ProjectsController < ApplicationController
+  include SharedConcepts
+
   before_action :set_project_statuses, only: [:new, :edit]
 
   def new
@@ -14,7 +16,7 @@ class ProjectsController < ApplicationController
   end
 
   def show
-    @project = Project.find(params[:id])
+    @project = Project.includes(PROJECT_PRELOAD_FEILDS).find(params[:id])
   end
 
   def create
