@@ -22,6 +22,6 @@ class User < ApplicationRecord
   private
 
   def create_employee_profile
-    Employee.create(department: Department.find_by(name: "Staff"), user: self)
+    Employee.find_or_create_by!(user: self)
   end
 end

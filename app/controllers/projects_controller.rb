@@ -16,7 +16,7 @@ class ProjectsController < ApplicationController
   end
 
   def show
-    @project = Project.includes(PROJECT_PRELOAD_FEILDS).find(params[:id])
+    @project = Project.includes(PROJECT_PRELOAD_FIELDS).find(params[:id])
     @total = @project.participation.values.sum
   end
 

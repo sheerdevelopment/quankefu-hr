@@ -66,6 +66,14 @@
           %ul.nav.side-menu
             %li
               %a
+                %i.fa.fa-users
+                = t(:employees)
+                %span.fa.fa-chevron-down
+              %ul.nav.child_menu
+                %li
+                  %a{:href => employees_path}= t(:all)
+            %li
+              %a
                 %i.fa.fa-calendar-check-o
                 = t(:absences)
                 %span.fa.fa-chevron-down

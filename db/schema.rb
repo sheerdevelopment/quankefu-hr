@@ -89,12 +89,12 @@ ActiveRecord::Schema.define(version: 20170116173606) do
   end
 
   create_table "employees", force: :cascade do |t|
-    t.string   "postcode",            limit: 50
+    t.string   "postcode",            limit: 100
     t.string   "city",                limit: 100
     t.string   "county",              limit: 100
     t.string   "line1",               limit: 100
     t.string   "line2",               limit: 100
-    t.string   "country",             limit: 50
+    t.string   "country",             limit: 100
     t.integer  "user_id"
     t.integer  "department_id"
     t.string   "first_name",          limit: 100

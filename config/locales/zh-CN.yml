@@ -36,6 +36,9 @@ zh-CN:
   actions: "操作"
   employee: "申请人"
 
+  employees: "职员"
+  full_name: "全名"
+  role: "级别"
   first_name: "名字"
   middle_name: "选填"
   last_name: "姓"

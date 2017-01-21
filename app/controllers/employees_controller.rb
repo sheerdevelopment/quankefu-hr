@@ -1,4 +1,5 @@
 class EmployeesController < ApplicationController
+  include SharedConcepts
   before_action :set_genders, only: :edit
   before_action :set_departments, only: :edit, if: :current_admin?
 
@@ -16,6 +17,10 @@ class EmployeesController < ApplicationController
       set_departments if current_admin?
       render :edit
     end
+  end
+
+  def index
+    @employees = Employee.includes(EMPLOYEE_RELOAD_FIELDS).paginate(page: params[:page])
   end
 
   private

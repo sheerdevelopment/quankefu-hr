@@ -7,7 +7,7 @@ class AbsencesController < ApplicationController
   end
 
   def index
-    @absences = Absence.includes(ABSENCE_PRELOAD_FEILDS).paginate(page: params[:page])
+    @absences = Absence.includes(ABSENCE_PRELOAD_FIELDS).paginate(page: params[:page])
   end
 
   def edit

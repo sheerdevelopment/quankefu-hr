@@ -6,6 +6,8 @@ class Employee < ApplicationRecord
 
   delegate :username, to: :user
 
+  before_save :set_default_department
+
   has_attached_file :avatar,
     :styles => { medium: "128x128#" },
     :path => "#{::PAPERCLIP_PATH}/avatars/:id/:style/:filename",
@@ -23,5 +25,11 @@ class Employee < ApplicationRecord
 
   def work_hours(start_date = Time.now.beginning_of_week, end_date = Time.now.end_of_week)
     @work_hours ||= diaries.where("start >= ? AND 'end' <= ?", start_date, end_date).sum(:hours) || 0
+  end
+
+  private
+
+  def set_default_department
+    self.department ||= Department.find_by(name: "Staff")
   end
 end

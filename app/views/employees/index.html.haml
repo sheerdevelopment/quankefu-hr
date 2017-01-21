@@ -1,0 +1,49 @@
+- provide :body_class, "nav-md"
+
+.right_col{:role => "main"}
+  .row
+    .col-md-12.col-sm-12.col-xs-12
+      = will_paginate @employees, renderer: BootstrapPagination::Rails
+
+    .col-md-12.col-sm-12.col-xs-12
+      .x_panel
+        .x_title
+          %h2
+            = t(:employees)
+            %a.btn.btn-xs.btn-info{href: new_project_path}= t(:add)
+          %ul.nav.navbar-right.panel_toolbox
+            %li
+              %a.collapse-link
+                %i.fa.fa-chevron-up
+            %li
+              %a.close-link
+                %i.fa.fa-close
+          .clearfix
+        .x_content
+          %table.table.table-hover
+            %thead
+              %tr
+                %th= t(:full_name)
+                %th= t(:gender)
+                %th= t(:department)
+                %th= t(:dob)
+                %th= t(:role)
+                - if current_admin?
+                  %th= t(:actions)
+
+            %tbody
+              - @employees.each do |employee|
+                %tr
+                  %td= link_to employee.full_name, employee_path(employee)
+                  %td= employee.gender.try(:name)
+                  %td= employee.department.name
+                  %td= employee.dob
+                  %td= employee.user.role.name
+                  - if current_admin?
+                    %td
+                      %a.btn.btn-info.btn-xs{:href => edit_employee_path(employee)}
+                        %i.fa.fa-pencil
+                        = t(:edit)
+
+    .col-md-12.col-sm-12.col-xs-12
+      = will_paginate @employees, renderer: BootstrapPagination::Rails

@@ -1,6 +1,6 @@
 namespace :db do
   task sample: :environment do
-    Faker::Config.locale = :uk
+    Faker::Config.locale = "en-GB"
 
     admin = User.create!(email: "admin@admin.com",
       password: "password", password_confirmation: "password",
@@ -15,10 +15,12 @@ namespace :db do
         password: "password", password_confirmation: "password",
         user_role_id: UserRole::MANAGER)
 
-      Employee.create!(first_name: first_name, last_name: last_name, gender: genders.sample,
+      employee = Employee.find_or_create_by(user: user)
+      employee.update_attributes(first_name: first_name, last_name: last_name, gender: genders.sample,
         department: department, line1: Faker::Address.street_address, city: Faker::Address.city,
-        postcode: Faker::Address.postcode, country: Faker::Address.country, user: user,
+        postcode: Faker::Address.postcode, country: Faker::Address.country,
         title: "#{department.name} Manager", dob: Faker::Date.birthday, mobile: Faker::PhoneNumber.cell_phone)
+      employee
     end
 
     all_staff = managers.reduce([]) do |result, manager|
@@ -31,11 +33,11 @@ namespace :db do
           password: "password", password_confirmation: "password",
           user_role_id: UserRole::EMPLOYEE)
 
-        employee = Employee.create!(first_name: first_name, last_name: last_name, gender: genders.sample,
+        employee = Employee.find_or_create_by(user: user)
+        employee.update_attributes(first_name: first_name, last_name: last_name, gender: genders.sample,
           department: manager.department, line1: Faker::Address.street_address, city: Faker::Address.city,
-          postcode: Faker::Address.postcode, country: Faker::Address.country, user: user,
+          postcode: Faker::Address.postcode, country: Faker::Address.country,
           title: title, dob: Faker::Date.birthday, mobile: Faker::PhoneNumber.cell_phone)
-
         result << employee
       end
 
