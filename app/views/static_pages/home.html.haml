@@ -4,7 +4,7 @@
   %div
     .page-title
       .title_left
-        %h3 Welcome
+        %h3= t(:welcome)
     .clearfix
 
     .row.top_tiles
@@ -13,13 +13,13 @@
           .icon
             %i.fa.fa-plane
           .count= @taken_holidays
-          %h3 Taken holidays
+          %h3= t(:taken_holidays)
       .animated.flipInY.col-lg-3.col-md-3.col-sm-6.col-xs-12
         .tile-stats
           .icon
             %i.fa.fa-clock-o
           .count= @work_hours
-          %h3 Hours this week
+          %h3= t(:hours_of_week)
 
     .row
       .col-md-12.col-sm-12.col-xs-12
@@ -45,5 +45,5 @@
 
               %a.btn.btn-success{:href => edit_employee_path(current_employee)}
                 %i.fa.fa-edit.m-right-xs
-                Edit Profile
+                = t(:edit_profile)
               %br/

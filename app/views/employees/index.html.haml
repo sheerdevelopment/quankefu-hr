@@ -34,7 +34,7 @@
             %tbody
               - @employees.each do |employee|
                 %tr
-                  %td= link_to employee.full_name, employee_path(employee)
+                  %td= link_to employee.full_name, edit_employee_path(employee)
                   %td= employee.gender.try(:name)
                   %td= employee.department.name
                   %td= employee.dob

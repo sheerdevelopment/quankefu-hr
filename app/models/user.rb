@@ -16,7 +16,9 @@ class User < ApplicationRecord
   end
 
   def taken_holidays(start_date = Time.now.beginning_of_year, end_date = Time.now.end_of_year)
-    @taken_holidays ||= absences.where("start >= ? AND 'end' <= ?", start_date, end_date).sum(:days)
+    @taken_holidays ||= absences.where("start >= ? AND 'end' <= ?", start_date, end_date).
+                                 where(absence_status_id: AbsenceStatus::APPROVED).
+                                 sum(:days)
   end
 
   private

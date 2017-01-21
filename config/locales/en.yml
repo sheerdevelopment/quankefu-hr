@@ -20,6 +20,8 @@ en:
   approve: "Approve"
   cancel: "Cancel"
   reject: "Reject"
+  taken_holidays: "Taken holidays"
+  hours_of_week: "Hours of week"
 
   admin_section: "Admin section"
   language: "Language"
@@ -57,6 +59,7 @@ en:
   mobile: "Mobile"
   title: "Title"
   department: "Department"
+  email: "Email"
 
   projects: "Projects"
   project_name: "Name"
@@ -66,3 +69,5 @@ en:
   add: "Add"
   in_progress: "In progress"
   finish: "Finished"
+  participants: "Participants"
+  total_spent: "Total spent"

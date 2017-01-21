@@ -39,7 +39,7 @@
                     .label{class: "label-#{label_colour(absence)}"}
                       = absence.status.name.titleize
                   %td= absence.type.name.titleize
-                  %td= absence.user.username
+                  %td= link_to absence.user.username, edit_employee_path(absence.user.employee)
                   %td= local_time(absence.start)
                   %td= local_time(absence.end)
                   %td= absence.days

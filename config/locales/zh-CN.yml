@@ -20,6 +20,8 @@ zh-CN:
   approve: "批准"
   cancel: "取消"
   reject: "否决"
+  taken_holidays: "已用假期"
+  hours_of_week: "本周工时"
 
   admin_section: "管理员"
   language: "语言"
@@ -57,6 +59,7 @@ zh-CN:
   mobile: "手机号码"
   title: "职称"
   department: "所属部门"
+  email: "邮箱"
 
   projects: "项目"
   project_name: "名称"
@@ -66,4 +69,5 @@ zh-CN:
   add: "添加"
   in_progress: "进行中"
   finish: "已完成"
-
+  participants: "参与者"
+  total_spent: "总花费"

@@ -3,7 +3,8 @@ module SharedConcern
 
   ABSENCE_PRELOAD_FIELDS = [
     { type: [:translations] },
-    { status: [:translations] }
+    { status: [:translations] },
+    { user: [:employee] }
   ]
 
   PROJECT_PRELOAD_FIELDS = [

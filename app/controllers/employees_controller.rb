@@ -24,6 +24,10 @@ class EmployeesController < ApplicationController
     @employees = Employee.includes(EMPLOYEE_RELOAD_FIELDS).paginate(page: params[:page])
   end
 
+  def show
+    @employee = Employee.find(params[:id])
+  end
+
   private
 
   def employee_params
