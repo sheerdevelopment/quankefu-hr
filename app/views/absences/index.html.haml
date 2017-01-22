@@ -44,7 +44,7 @@
                   %td= local_time(absence.end)
                   %td= absence.days
                   %td= absence.comments
-                  - if current_user.admin?
+                  - if current_admin?
                     %td
                       %a.btn.btn-info.btn-xs{:href => edit_absence_path(absence)}
                         %i.fa.fa-pencil

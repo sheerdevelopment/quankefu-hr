@@ -5,7 +5,7 @@ class EmployeesController < ApplicationController
   before_action :set_departments, only: :edit, if: :current_admin?
 
   def edit
-    @employee = authorize Employee.find(params[:id])
+    @employee = authorize Employee.includes(EMPLOYEE_RELOAD_FIELDS).find(params[:id])
   end
 
   def update

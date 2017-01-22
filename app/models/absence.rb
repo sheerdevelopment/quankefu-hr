@@ -4,7 +4,7 @@ class Absence < ApplicationRecord
   belongs_to :user
 
   before_save :cal_days
-  default_scope { order(:absence_status_id) }
+  default_scope { order(:absence_status_id, start: :desc ) }
 
   SECONDS_A_DAY = 60 * 60 * 24
   def cal_days

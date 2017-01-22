@@ -34,7 +34,7 @@
               - @projects.each do |project|
                 %tr
                   %td= link_to project.name, project_path(project)
-                  %td= project.comment
+                  %td= link_to project.comment, project_path(project)
                   %td= project.status.name
                   %td= local_time(project.created_at)
                   - if current_admin?

@@ -19,4 +19,9 @@ module SharedConcern
     { department: [:translations] },
     { gender: [:translations] }
   ]
+
+  DIARY_RELOAD_FIELDS = [
+    { employee: [:user] },
+    :project
+  ]
 end

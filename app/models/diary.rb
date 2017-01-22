@@ -11,6 +11,6 @@ class Diary < ApplicationRecord
   end
 
   def allow_modify?
-    ProjectStatus::IN_PROGRESS == project_status_id
+    ProjectStatus::IN_PROGRESS == project.project_status_id
   end
 end

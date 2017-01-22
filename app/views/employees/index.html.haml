@@ -33,8 +33,8 @@
 
             %tbody
               - @employees.each do |employee|
-                %tr
-                  %td= link_to employee.full_name, edit_employee_path(employee)
+                %tr.table-row{"data-href" => edit_employee_path(employee)}
+                  %td= employee.full_name
                   %td= employee.gender.try(:name)
                   %td= employee.department.name
                   %td= employee.dob
@@ -47,3 +47,10 @@
 
     .col-md-12.col-sm-12.col-xs-12
       = will_paginate @employees, renderer: BootstrapPagination::Rails
+
+:javascript
+  $(document).ready(function($) {
+    $(".table-row").click(function() {
+        window.document.location = $(this).data("href");
+    });
+  });

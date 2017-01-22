@@ -14,9 +14,9 @@
                 = render "shared/error_messages", object: @diary
 
                 .form-group
-                  %label.control-label.col-md-3.col-sm-3.col-xs-12 Select Custom
+                  %label.control-label.col-md-3.col-sm-3.col-xs-12= t(:projects)
                   .col-md-9.col-sm-9.col-xs-12
-                    %select.select2_single.form-control{:name => "diary[project_id]"}
+                    %select.select2_single.form-control{:name => "diary[project_id]", :required => ""}
                       - @projects.each do |project|
                         %option{:value => project.id, :selected => selected_if(project, @diary.project)}= project.name
 
@@ -96,7 +96,7 @@
     });
 
     $(".select2_single").select2({
-      placeholder: "Select a state",
+      placeholder: "#{t(:projects)}",
       allowClear: true
     });
   });

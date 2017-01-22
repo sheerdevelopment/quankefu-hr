@@ -1,4 +1,6 @@
 class DiariesController < ApplicationController
+  include SharedConcern
+
   before_action :set_projects, only: [:new, :edit]
 
   def new
@@ -6,7 +8,7 @@ class DiariesController < ApplicationController
   end
 
   def edit
-    @diary = authorize Diary.find(params[:id])
+    @diary = authorize Diary.includes(DIARY_RELOAD_FIELDS).find(params[:id])
   end
 
   def index
