@@ -6,7 +6,7 @@ namespace :db do
       password: "password", password_confirmation: "password",
       user_role_id: UserRole::ADMIN)
 
-    Employee.find_or_create_by(user: admin).update_attributes(first_name: "Admin", last_name: "SlimHR", gender: genders.sample,
+    Employee.find_or_create_by(user: admin).update_attributes(first_name: "Admin", last_name: "SlimHR", gender_id: Gender::MALE,
         line1: Faker::Address.street_address, city: Faker::Address.city,
         postcode: Faker::Address.postcode, country: Faker::Address.country,
         title: "CEO", dob: Faker::Date.birthday, mobile: Faker::PhoneNumber.cell_phone)
