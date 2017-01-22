@@ -10,4 +10,8 @@ class Absence < ApplicationRecord
   def cal_days
     self.days = ((self.end - self.start) / SECONDS_A_DAY).round(2)
   end
+
+  def allow_modify?
+    AbsenceStatus::PENDING == absence_status_id
+  end
 end

@@ -6,11 +6,11 @@ class DiariesController < ApplicationController
   end
 
   def edit
-    @diary = Diary.find(params[:id])
+    @diary = authorize Diary.find(params[:id])
   end
 
   def index
-    @diaries = Diary.paginate(page: params[:page])
+    @diaries = policy_scope(Diary).paginate(page: params[:page])
   end
 
   def create
@@ -24,7 +24,7 @@ class DiariesController < ApplicationController
   end
 
   def update
-    @diary = Diary.find(params[:id])
+    @diary = authorize Diary.find(params[:id])
     if @diary.update_attributes(diary_params)
       flash[:success] = "Diary is updated."
       redirect_to diaries_path

@@ -5,11 +5,11 @@ class EmployeesController < ApplicationController
   before_action :set_departments, only: :edit, if: :current_admin?
 
   def edit
-    @employee = Employee.find(params[:id])
+    @employee = authorize Employee.find(params[:id])
   end
 
   def update
-    @employee = Employee.find(params[:id])
+    @employee = authorize Employee.find(params[:id])
     if @employee.update_attributes(employee_params)
       flash[:success] = "Profile updated."
       redirect_to edit_employee_path(@employee)
@@ -21,11 +21,8 @@ class EmployeesController < ApplicationController
   end
 
   def index
+    redirect_to root_path unless current_admin?
     @employees = Employee.includes(EMPLOYEE_RELOAD_FIELDS).paginate(page: params[:page])
-  end
-
-  def show
-    @employee = Employee.find(params[:id])
   end
 
   private

@@ -3,15 +3,12 @@ class AbsencesController < ApplicationController
 
   before_action :set_absence_types, only: [:new, :edit]
 
-  def show
-  end
-
   def index
-    @absences = Absence.includes(ABSENCE_PRELOAD_FIELDS).paginate(page: params[:page])
+    @absences = policy_scope(Absence).includes(ABSENCE_PRELOAD_FIELDS).paginate(page: params[:page])
   end
 
   def edit
-    @absence = Absence.find(params[:id])
+    @absence = authorize Absence.find(params[:id])
   end
 
   def new
@@ -30,7 +27,7 @@ class AbsencesController < ApplicationController
   end
 
   def update
-    @absence = Absence.find(params[:id])
+    @absence = authorize Absence.find(params[:id])
     if @absence.update_attributes(update_params)
       flash[:success] = "Absence request is cancelled."
       redirect_to absences_path
@@ -40,7 +37,7 @@ class AbsencesController < ApplicationController
   end
 
   def admin_action
-    @absence = Absence.find(params[:absence_id])
+    @absence = authorize Absence.find(params[:absence_id])
     if @absence.update_attributes(absence_status_id: params[:status])
       flash[:success] = "Absence is updated successfully."
     end

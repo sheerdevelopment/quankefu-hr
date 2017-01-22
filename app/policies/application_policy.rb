@@ -6,10 +6,6 @@ class ApplicationPolicy
     @record = record
   end
 
-  def index?
-    record.user_id == user.id
-  end
-
   def show?
     user.admin? || record.user_id == user.id
   end
@@ -18,16 +14,16 @@ class ApplicationPolicy
     user.admin?
   end
 
-  def new?
-    create?
+  def edit?
+    user.admin? ||
+    (
+      record.user_id == user.id &&
+      (!record.respond_to?(:allow_modify?) || record.allow_modify?)
+    )
   end
 
   def update?
-    create?
-  end
-
-  def edit?
-    create?
+    edit?
   end
 
   def destroy?
