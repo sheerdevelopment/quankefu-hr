@@ -11,24 +11,24 @@
           %input{:name => "utf8", :type => "hidden", :value => "✓"}/
           %input{:name => "authenticity_token", :type => "hidden", :value => form_authenticity_token}/
 
-          %h1 Login Form
+          %h1= t(:login)
 
           %div
-            %input.form-control{:placeholder => "Email", :required => "", :type => "email", :name => "user[email]", :id => "user_email"}/
+            %input.form-control{:placeholder => t(:email), :required => "", :type => "email", :name => "user[email]", :id => "user_email"}/
           %div
-            %input.form-control{:placeholder => "Password", :required => "", :type => "password", :name => "user[password]", :id => "user_password"}/
+            %input.form-control{:placeholder => t(:password), :required => "", :type => "password", :name => "user[password]", :id => "user_password"}/
           %div
             .checkbox
               %label
                 %input{:type => "checkbox", :name => "user[remember_me]"}/
-                Remember me
+                = t(:remember_me)
           %div
-            %button.btn.btn-default.submit{:type => "submit"} Log in
+            %button.btn.btn-default.submit{:type => "submit"}= t(:login)
           .clearfix
           .separator
             %p.change_link
-              New to site?
-              %a.to_register{:href => new_user_registration_path} Create Account
+              = t(:new_to_site)
+              %a.to_register{:href => new_user_registration_path}= t(:create_account)
             .clearfix
             %br/
             %div

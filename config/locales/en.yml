@@ -2,6 +2,8 @@ en:
   create_account: "Create Account"
   already_a_member: "Already a member ?"
   login: "Log in"
+  remember_me: "Remember me"
+  new_to_site: "New to size?"
 
   company_name: "SlimHR"
   welcome: "Welcom"

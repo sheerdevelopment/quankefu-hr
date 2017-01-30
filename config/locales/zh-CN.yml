@@ -2,6 +2,8 @@ zh-CN:
   create_account: "创建账号"
   already_a_member: "已有账号？"
   login: "登录"
+  remember_me: "记住账号"
+  new_to_site: "没有账号？"
 
   company_name: "SlimHR"
   welcome: "欢迎回来"
