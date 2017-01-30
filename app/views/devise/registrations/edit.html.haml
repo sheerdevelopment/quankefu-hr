@@ -4,7 +4,7 @@
   %div
     .page-title
       .title_left
-        %h3 Edit profile
+        %h3= t(:edit_profile)
       .clearfix
 
       .row
@@ -18,19 +18,19 @@
 
                 .form-group
                   %label.control-label.col-md-3.col-sm-3.col-xs-12{:for => "user_password"}
-                    New password
+                    = t(:new_password)
                   .col-md-6.col-sm-6.col-xs-12
                     %input#user_password.form-control.col-md-7.col-xs-12{:name => "user[password]", :type => "password"}/
                     .help-block
-                      %i Let it blank if you don't want to change
+                      %i= t(:leave_password_blank)
                 .form-group
                   %label.control-label.col-md-3.col-sm-3.col-xs-12{:for => "password_confirmation"}
-                    Password confirmation
+                    = t(:password_confirmation)
                   .col-md-6.col-sm-6.col-xs-12
                     %input#password_confirmation.form-control.col-md-7.col-xs-12{:type => "password", :name => "user[password_confirmation]", :id => "user_password_confirmation"}/
                 .form-group
                   %label.control-label.col-md-3.col-sm-3.col-xs-12{:for => "current_password"}
-                    Current password
+                    = t(:current_password)
                     %span.required
                   .col-md-6.col-sm-6.col-xs-12
                     %input#current_password.form-control.col-md-7.col-xs-12{:type => "password", :name => "user[current_password]", :id => "user_current_password"}/
@@ -38,4 +38,4 @@
                 .ln_solid
                 .form-group
                   .col-md-6.col-sm-6.col-xs-12.col-md-offset-3
-                    %button.btn.btn-success{:type => "submit"} Submit
+                    %button.btn.btn-success{:type => "submit"}= t(:submit)

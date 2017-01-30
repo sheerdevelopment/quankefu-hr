@@ -8,23 +8,23 @@
           %input{:name => "utf8", :type => "hidden", :value => "✓"}/
           %input{:name => "authenticity_token", :type => "hidden", :value => form_authenticity_token}/
 
-          %h1 Create Account
+          %h1= t(:create_account)
 
           = devise_error_messages!
 
           %div
-            %input.form-control{:placeholder => "Email", :required => "", :type => "email", :name => "user[email]", :id => "user_email"}/
+            %input.form-control{:placeholder => t(:email), :required => "", :type => "email", :name => "user[email]", :id => "user_email"}/
           %div
-            %input.form-control{:placeholder => "Password", :required => "", :type => "password", :name => "user[password]", :id => "user_password"}/
+            %input.form-control{:placeholder => t(:password), :required => "", :type => "password", :name => "user[password]", :id => "user_password"}/
           %div
-            %input.form-control{:placeholder => "confirmation", :required => "", :type => "password", :name => "user[password_confirmation]", :id => "user_password_confirmation"}/
+            %input.form-control{:placeholder => t(:password_confirmation), :required => "", :type => "password", :name => "user[password_confirmation]", :id => "user_password_confirmation"}/
           %div
-            %button.btn.btn-default.submit{:type => "submit"} Submit
+            %button.btn.btn-default.submit{:type => "submit"}= t(:submit)
           .clearfix
           .separator
             %p.change_link
-              Already a member ?
-              %a.to_register{:href => new_user_session_path} Log in
+              = t(:already_a_member)
+              %a.to_register{:href => new_user_session_path}= t(:login)
             .clearfix
             %br/
             %div

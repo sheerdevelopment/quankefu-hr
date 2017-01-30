@@ -1,4 +1,8 @@
 zh-CN:
+  create_account: "创建账号"
+  already_a_member: "已有账号？"
+  login: "登录"
+
   company_name: "SlimHR"
   welcome: "欢迎回来"
   general: "通用"
@@ -60,6 +64,11 @@ zh-CN:
   title: "职称"
   department: "所属部门"
   email: "邮箱"
+  password: "密码"
+  password_confirmation: "确认密码"
+  new_password: "新密码"
+  leave_password_blank: "请勿填写若不想修改"
+  current_password: "现有密码"
 
   projects: "项目"
   project_name: "名称"

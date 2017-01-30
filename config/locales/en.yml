@@ -1,4 +1,8 @@
 en:
+  create_account: "Create Account"
+  already_a_member: "Already a member ?"
+  login: "Log in"
+
   company_name: "SlimHR"
   welcome: "Welcom"
   general: "General"
@@ -60,6 +64,11 @@ en:
   title: "Title"
   department: "Department"
   email: "Email"
+  password: "Password"
+  password_confirmation: "Password confirmation"
+  new_password: "New password"
+  leave_password_blank: "Let it blank if you don't want to change"
+  current_password: "Current password"
 
   projects: "Projects"
   project_name: "Name"
