@@ -10,6 +10,7 @@ class User < ApplicationRecord
   has_many :absences
 
   after_create :create_employee_profile
+  scope :admins, { where(user_role_id: UserRole::ADMIN) }
 
   def username
     employee.try(:first_name) || email

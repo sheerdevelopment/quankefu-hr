@@ -6,6 +6,7 @@ en:
   new_to_site: "New to size?"
 
   company_name: "SlimHR"
+  company_address: "3/F Davenport House, 16 Pepper Street, Glengall Bridge, Canary Wharf, E14 9RP"
   welcome: "Welcom"
   general: "General"
   home: "Home"
@@ -82,3 +83,10 @@ en:
   finish: "Finished"
   participants: "Participants"
   total_spent: "Total spent"
+
+  # controller / email messages
+  absence_mailer:
+    request:
+      subject: "%{name} has submitted a new absence request."
+      greeting: "Hi %{admin_name}"
+      view_email_in_browser: "View this email in your browser"

@@ -6,6 +6,7 @@ zh-CN:
   new_to_site: "没有账号？"
 
   company_name: "SlimHR"
+  company_address: "3/F Davenport House, 16 Pepper Street, Glengall Bridge, Canary Wharf, E14 9RP"
   welcome: "欢迎回来"
   general: "通用"
   home: "首页"
@@ -142,3 +143,11 @@ zh-CN:
       not_saved:
         one: "因为1个错误导致此%{resource}保存失败:"
         other: "因为%{count}个错误导致此%{resource}保存失败:"
+
+  # controller / email messages
+  absence_mailer:
+    request:
+      subject: "%{name} 提交了新的请假申请."
+      greeting: "你好 %{admin_name}"
+      view_email_in_browser: "在浏览器中打开邮件"
+
