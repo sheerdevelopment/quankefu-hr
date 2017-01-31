@@ -87,6 +87,4 @@ en:
   # controller / email messages
   absence_mailer:
     request:
-      subject: "%{name} has submitted a new absence request."
-      greeting: "Hi %{admin_name}"
       view_email_in_browser: "View this email in your browser"

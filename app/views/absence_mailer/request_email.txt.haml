@@ -1,6 +1,6 @@
 - provide :email_title, "Message from #{@user.employee.full_name}"
 
-= t(".greeting, name: @admin.username"),
+Hi #{@admin.username},
 
 #{@user.employee.full_name} has submitted a new absence request. Please click
 = link_to "HERE", absences_path(@absence)

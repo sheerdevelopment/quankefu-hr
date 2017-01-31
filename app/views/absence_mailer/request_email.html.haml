@@ -111,11 +111,13 @@
                     / COPY
                     %table{:border => "0", :cellpadding => "0", :cellspacing => "0", :width => "100%"}
                       %tr
-                        %td.padding-copy{:align => "left", :style => "padding: 20px 0 0 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #666666;"}= t(".greeting, name: @admin.username"),
+                        %td.padding-copy{:align => "left", :style => "padding: 20px 0 0 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #666666;"}
+                          Hi #{@admin.username},
                       %tr
-                        %td.padding-copy{:align => "left", :style => "padding: 20px 0 0 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #666666;"} #{@user.employee.full_name} has submitted a new absence request. Please click
-                        = link_to "HERE", absences_path(@absence)
-                        to view.
+                        %td.padding-copy{:align => "left", :style => "padding: 20px 0 0 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #666666;"}
+                          #{@user.employee.full_name} has submitted a new absence request. Please click
+                          = link_to "HERE", absences_url
+                          to view.
 
                       %tr
                         %td.padding-copy{:align => "left", :style => "padding: 20px 0 0 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #666666;"}

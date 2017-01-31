@@ -147,7 +147,4 @@ zh-CN:
   # controller / email messages
   absence_mailer:
     request:
-      subject: "%{name} 提交了新的请假申请."
-      greeting: "你好 %{admin_name}"
       view_email_in_browser: "在浏览器中打开邮件"
-
