@@ -14,6 +14,7 @@ ActiveRecord::Schema.define(version: 20170116173606) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "intarray"
 
   create_table "absence_status_translations", force: :cascade do |t|
     t.integer  "absence_status_id", null: false
