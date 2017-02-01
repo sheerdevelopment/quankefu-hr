@@ -1,11 +1,11 @@
-- provide :email_title, "Message from #{@user.employee.full_name}"
+- provide :email_title, "来自#{@user.employee.full_name}的信息"
 
-Hi #{@admin.username},
+你好 #{@admin.username},
 
-#{@user.employee.full_name} has submitted a new absence request. Please click
-= link_to "HERE", absences_path(@absence)
-to view.
+#{@user.employee.full_name}提交了新的假期申请。 请点击
+= link_to "此处", absences_path(@absence)
+查看。
 
-Cheers
+谢谢
 
-The Dev Team
+全客福技术团队
