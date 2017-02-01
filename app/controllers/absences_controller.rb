@@ -39,9 +39,10 @@ class AbsencesController < ApplicationController
   end
 
   def admin_action
-    @absence = authorize Absence.find(params[:absence_id])
+    @absence = authorize Absence.includes(:user).find(params[:absence_id])
     if @absence.update_attributes(absence_status_id: params[:status])
       flash[:success] = "Absence is updated successfully."
+      AbsenceMailer.status_email(user: @absence.user, absence: @absence).deliver
     end
     redirect_to absences_path
   end

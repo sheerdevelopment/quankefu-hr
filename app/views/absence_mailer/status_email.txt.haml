@@ -1,0 +1,11 @@
+- provide :email_title, "Message from #{@user.employee.full_name}"
+
+Hi #{@user.username},
+
+Your absence request has been updated. Please click
+= link_to "HERE", absences_url
+to view.
+
+Cheers
+
+The Dev Team
