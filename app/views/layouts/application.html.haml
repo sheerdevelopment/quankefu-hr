@@ -1,6 +1,8 @@
 !!!
-%html
+%html{:lang => "zh"}
   %head
+    %meta{:charset => "UTF-8"}/
+    %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}/
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
     %title= t(:company_name)
     = csrf_meta_tags
