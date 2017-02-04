@@ -19,9 +19,9 @@ class AbsencesController < ApplicationController
     user = current_user
     @absence = Absence.new(absence_params.merge(absence_status_id: AbsenceStatus::PENDING, user: user))
     if @absence.save
-      AbsenceMailer.request_email(user: user, absence: absence, admin: User.admins.first).deliver
+      AbsenceMailer.request_email(user: user, absence: @absence, admin: User.admins.first).deliver
       flash[:success] = "Absence request is submitted, waiting for approval."
-      redirect_to new_absence_path
+      redirect_to absences_path
     else
       set_absence_types
       render :new
