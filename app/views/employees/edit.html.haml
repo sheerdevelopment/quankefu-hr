@@ -95,14 +95,11 @@
 
 :javascript
   $(document).ready(function(){
-    var startPicker = $('#dob');
-
-    startPicker.datetimepicker({
-      format: 'YYYY-MM-DD',
-      useCurrent: false
-    });
-
-    startPicker.click(function(){
-      $(this).datetimepicker('show');
-    });
+    var options = {
+      locale: {
+        format: "YYYY-MM-DD",
+      },
+      singleDatePicker: true
+    }
+    $('#dob input').daterangepicker(options);
   });
