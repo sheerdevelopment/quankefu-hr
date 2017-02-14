@@ -22,6 +22,7 @@
           %table.table.table-hover
             %thead
               %tr
+                %th ID
                 %th= t(:absence_status)
                 %th= t(:absence_type)
                 %th= t(:employee)
@@ -35,6 +36,7 @@
             %tbody
               - @absences.each do |absence|
                 %tr
+                  %td= absence.id
                   %td
                     .label{class: "label-#{label_colour(absence)}"}
                       = absence.status.name.titleize

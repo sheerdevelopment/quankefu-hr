@@ -44,6 +44,7 @@ en:
   absence_status: "Status"
   actions: "Actions"
   employee: "Employee"
+  period_time: "Period time"
 
   employees: "Employees"
   full_name: "Full name"

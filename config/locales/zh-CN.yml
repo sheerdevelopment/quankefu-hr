@@ -44,6 +44,7 @@ zh-CN:
   absence_status: "申请状态"
   actions: "操作"
   employee: "申请人"
+  period_time: "期间"
 
   employees: "职员"
   full_name: "全名"

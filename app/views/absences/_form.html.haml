@@ -13,6 +13,9 @@
               = form_for(@absence, html: { class: "form-horizontal form-label-left" }) do |f|
                 = render "shared/error_messages", object: @absence
 
+                = hidden_field(:absence, :start, value: @absence.try(:start) || Time.now.beginning_of_day)
+                = hidden_field(:absence, :end, value: @absence.try(:end) || Time.now.end_of_day)
+
                 .form-group
                   %label.control-label.col-md-3.col-sm-3.col-xs-12{:for => "Type"}
                     = t(:absence_type)
@@ -27,22 +30,12 @@
                           = absence_type.name
 
                 .form-group
-                  %label.control-label.col-md-3.col-sm-3.col-xs-12{:for => "start"}
-                    = t(:start_time)
+                  %label.control-label.col-md-3.col-sm-3.col-xs-12{:for => "period"}
+                    = t(:period_time)
                     %span.required *
-                  .col-md-3.col-sm-3.col-xs-12
-                    #start.input-group
-                      %input.form-control.col-md-7.col-xs-12{:type => "text", :name => "absence[start]", :value => @absence.try(:start).try(:strftime, "%Y-%m-%d %H:%M:%S"), :required => ""}/
-                      %span.input-group-addon
-                        %i.fa.fa-calendar
-
-                .form-group
-                  %label.control-label.col-md-3.col-sm-3.col-xs-12{:for => "end"}
-                    = t(:end_time)
-                    %span.required *
-                  .col-md-3.col-sm-3.col-xs-12
-                    #end.input-group
-                      %input.form-control.col-md-7.col-xs-12{:type => "text", :name => "absence[end]", :value => @absence.try(:end).try(:strftime, "%Y-%m-%d %H:%M:%S"), :required => ""}/
+                  .col-md-6.col-sm-6.col-xs-12
+                    .input-group
+                      %input#period.form-control.col-md-7.col-xs-12{:type => "text", :required => ""}/
                       %span.input-group-addon
                         %i.fa.fa-calendar
 
@@ -51,7 +44,7 @@
                     = t(:days)
                   .entry
                     .col-md-3.col-sm-3.col-xs-3.input-field
-                      %input#days.form-control.col-md-7.col-xs-12{:type => "number", :value => @absence.days, :min => 0, :disabled => "disabled"}/
+                      %input#days.form-control.col-md-7.col-xs-12{:type => "number", :value => @absence.days, :min => 0, :disabled => "disabled", :required => ""}/
 
                 .form-group
                   %label.control-label.col-md-3.col-sm-3.col-xs-12{:for => "comments"}
@@ -68,38 +61,29 @@
 = javascript_include_tag "daterangepicker"
 
 :javascript
-  $(document).ready(function(){
-    var startPicker = $('#start');
-    var endPicker = $('#end');
-
-    startPicker.datetimepicker({
-      format: 'YYYY-MM-DD HH:mm',
-      useCurrent: false
-    });
-
-    endPicker.datetimepicker({
-      format: 'YYYY-MM-DD HH:mm',
-      useCurrent: false
-    });
-
-    startPicker.click(function(){
-      $(this).datetimepicker('show');
-    });
-
-    endPicker.click(function(){
-      $(this).datetimepicker('show');
-    });
-
-    startPicker.on('dp.change', function (e) {
-      endPicker.data('DateTimePicker').minDate(e.date);
-    });
-
-    endPicker.on('dp.change', function (e) {
-      var startDate = startPicker.datetimepicker('date');
-      if (startDate == null) {
-        startPicker.data('DateTimePicker').maxDate(e.date);
-      } else {
-        $('#days').val(daydiff(startDate, e.date));
+  $(document).ready(function() {
+    var options = {
+      timePicker: true,
+      timePicker24Hour: true,
+      locale: {
+        format: "YYYY-MM-DD HH:mm",
       }
+    }
+
+    var started_at = '#{@absence.try(:start).try(:strftime, "%Y-%m-%d %H:%M")}';
+    var ended_at = '#{@absence.try(:end).try(:strftime, "%Y-%m-%d %H:%M")}';
+
+    if (started_at) {
+      options['startDate'] = started_at;
+    }
+    if (ended_at) {
+      options['endDate'] = ended_at;
+    }
+
+    $('#period').daterangepicker(options);
+    $('#period').on('apply.daterangepicker', function(ev, picker) {
+      $('#days').val(daydiff(picker.startDate, picker.endDate));
+      $('#absence_start').val(picker.startDate);
+      $('#absence_end').val(picker.endDate);
     });
   });
