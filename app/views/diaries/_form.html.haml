@@ -13,6 +13,9 @@
               = form_for(@diary, html: { class: "form-horizontal form-label-left" }) do |f|
                 = render "shared/error_messages", object: @diary
 
+                = hidden_field(:diary, :start, value: @diary.try(:start) || Time.now.beginning_of_day)
+                = hidden_field(:diary, :end, value: @diary.try(:end) || Time.now.end_of_day)
+
                 .form-group
                   %label.control-label.col-md-3.col-sm-3.col-xs-12= t(:projects)
                   .col-md-9.col-sm-9.col-xs-12
@@ -21,22 +24,12 @@
                         %option{:value => project.id, :selected => selected_if(project, @diary.project)}= project.name
 
                 .form-group
-                  %label.control-label.col-md-3.col-sm-3.col-xs-12{:for => "start"}
-                    = t(:start_time)
+                  %label.control-label.col-md-3.col-sm-3.col-xs-12{:for => "period"}
+                    = t(:period_time)
                     %span.required *
-                  .col-md-3.col-sm-3.col-xs-12
-                    #start.input-group
-                      %input.form-control.col-md-7.col-xs-12{:type => "text", :name => "diary[start]", :value => @diary.try(:start).try(:strftime, "%Y-%m-%d %H:%M"), :required => ""}/
-                      %span.input-group-addon
-                        %i.fa.fa-calendar
-
-                .form-group
-                  %label.control-label.col-md-3.col-sm-3.col-xs-12{:for => "end"}
-                    = t(:end_time)
-                    %span.required *
-                  .col-md-3.col-sm-3.col-xs-12
-                    #end.input-group
-                      %input.form-control.col-md-7.col-xs-12{:type => "text", :name => "diary[end]", :value => @diary.try(:end).try(:strftime, "%Y-%m-%d %H:%M"), :required => ""}/
+                  .col-md-6.col-sm-6.col-xs-12
+                    .input-group
+                      %input#period.form-control.col-md-7.col-xs-12{:type => "text", :required => ""}/
                       %span.input-group-addon
                         %i.fa.fa-calendar
 
@@ -63,40 +56,28 @@
 
 :javascript
   $(document).ready(function(){
-    var startPicker = $('#start');
-    var endPicker = $('#end');
-
-    startPicker.datetimepicker({
-      format: 'YYYY-MM-DD HH:mm',
-      useCurrent: false
-    });
-
-    endPicker.datetimepicker({
-      format: 'YYYY-MM-DD HH:mm',
-      useCurrent: false
-    });
-
-    startPicker.click(function(){
-      $(this).datetimepicker('show');
-    });
-
-    endPicker.click(function(){
-      $(this).datetimepicker('show');
-    });
-
-    startPicker.on('dp.change', function (e) {
-      endPicker.data('DateTimePicker').minDate(e.date);
-    });
-
-    endPicker.on('dp.change', function (e) {
-      var startDate = startPicker.datetimepicker('date');
-      if (startDate != null) {
-        $('#hours').val(hourdiff(startDate, e.date));
+    var options = {
+      timePicker: true,
+      timePicker24Hour: true,
+      locale: {
+        format: "YYYY-MM-DD HH:mm",
       }
-    });
+    }
 
-    $(".select2_single").select2({
-      placeholder: "#{t(:projects)}",
-      allowClear: true
+    var started_at = '#{@diary.try(:start).try(:strftime, "%Y-%m-%d %H:%M")}';
+    var ended_at = '#{@diary.try(:end).try(:strftime, "%Y-%m-%d %H:%M")}';
+
+    if (started_at) {
+      options['startDate'] = started_at;
+    }
+    if (ended_at) {
+      options['endDate'] = ended_at;
+    }
+
+    $('#period').daterangepicker(options);
+    $('#period').on('apply.daterangepicker', function(ev, picker) {
+      $('#hours').val(hourdiff(picker.startDate, picker.endDate));
+      $('#diary_start').val(picker.startDate);
+      $('#diary_end').val(picker.endDate);
     });
   });
