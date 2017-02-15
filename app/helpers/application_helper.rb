@@ -3,8 +3,8 @@ module ApplicationHelper
     flash_type == "notice" ? :success : flash_type.to_sym
   end
 
-  def avatar_url
-    "avatar_missing.png"
+  def avatar_url(user: current_user, style: :medium)
+    user.avatar.present? ? user.avatar.url(style) : "avatar_missing.png"
   end
 
   def local_time(record)

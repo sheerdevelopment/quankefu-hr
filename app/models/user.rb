@@ -8,6 +8,7 @@ class User < ApplicationRecord
   delegate :admin?, to: :role
   has_one :employee
   has_many :absences
+  delegate :avatar, to: :employee
 
   after_create :create_employee_profile
   scope :admins, -> { where(user_role_id: UserRole::ADMIN) }

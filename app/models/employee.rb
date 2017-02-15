@@ -9,7 +9,7 @@ class Employee < ApplicationRecord
   before_save :set_default_department
 
   has_attached_file :avatar,
-    :styles => { medium: "128x128#" },
+    :styles => { medium: "128x128#", small: "56x56#" },
     :path => "#{::PAPERCLIP_PATH}/avatars/:id/:style/:filename",
     :url => "/avatars/:id/:style/:filename"
 

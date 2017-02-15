@@ -23,6 +23,7 @@
             %thead
               %tr
                 %th= t(:full_name)
+                %th= t(:avatar)
                 %th= t(:gender)
                 %th= t(:department)
                 %th= t(:dob)
@@ -34,6 +35,7 @@
               - @employees.each do |employee|
                 %tr.table-row{"data-href" => edit_employee_path(employee)}
                   %td= employee.full_name
+                  %td= image_tag avatar_url(user: employee.user, style: :small), :class => "img-circle centered", :size => "50x50"
                   %td= employee.gender.try(:name)
                   %td= employee.department.name
                   %td= employee.dob
