@@ -10,8 +10,7 @@ class Employee < ApplicationRecord
 
   has_attached_file :avatar,
     :styles => { medium: "128x128#", small: "56x56#" },
-    :path => "#{::PAPERCLIP_PATH}/avatars/:id/:style/:filename",
-    :url => "/avatars/:id/:style/:filename"
+    :path => "avatars/:id/:style/:filename"
 
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
 

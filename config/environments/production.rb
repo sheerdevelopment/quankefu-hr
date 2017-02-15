@@ -96,14 +96,5 @@ Rails.application.configure do
   }
   config.action_mailer.default_url_options = { host: ENV["APP_DOMAIN"] }
 
-  config.paperclip_defaults = {
-    storage: :cloudinary,
-    cloudinary_credentials: {
-      cloud_name: ENV["CLOUDINARY_CLOUD_NAME"]
-      api_key: ENV["CLOUDINARY_KEY"]
-      api_secret: ENV["CLOUDINARY_SECRET"]
-      enhance_image_tag: true
-      static_image_support: true
-    }
-  }
+  config.paperclip_defaults = { storage: :cloudinary }
 end
