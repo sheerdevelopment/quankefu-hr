@@ -10,8 +10,7 @@ class Absence < ApplicationRecord
   def cal_days
     range = (self.start.to_date + 1.day)..(self.end.to_date - 1.day)
     weekdays = range.select { |date| week_day?(date) }.size
-    seconds = 0
-    byebug
+    seconds = 0.0
     seconds += self.start.seconds_until_end_of_day if week_day?(self.start)
     seconds += self.end.seconds_since_midnight if week_day?(self.end)
     self.days = weekdays + (seconds / SECONDS_A_DAY).round(1)
