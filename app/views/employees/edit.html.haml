@@ -12,7 +12,7 @@
           .x_panel
             .x_content
               %br/
-              = form_for(@employee, html: { class: "form-horizontal form-label-left" }) do |f|
+              = form_for(@employee, html: { class: "form-horizontal form-label-left", multipart: true }) do |f|
                 = render "shared/error_messages", object: @employee
 
                 %h4= t(:profile)

@@ -30,7 +30,7 @@ class EmployeesController < ApplicationController
   def employee_params
     params.require(:employee).permit(:first_name, :middle_name, :last_name, :dob,
       :gender_id, :line1, :line2, :county, :city, :country, :postcode, :mobile,
-      :title, :department_id)
+      :title, :department_id, :avatar)
   end
 
   def set_genders
