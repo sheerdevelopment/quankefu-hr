@@ -8,6 +8,7 @@ class AbsencesController < ApplicationController
                           where(absence_status_id: AbsenceStatus::PENDING).all
     @absences = policy_scope(Absence).includes(ABSENCE_PRELOAD_FIELDS).
                   where.not(absence_status_id: AbsenceStatus::PENDING).
+                  order(id: :desc).
                   paginate(page: params[:page])
   end
 
