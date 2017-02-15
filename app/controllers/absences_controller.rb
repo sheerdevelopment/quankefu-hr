@@ -4,7 +4,11 @@ class AbsencesController < ApplicationController
   before_action :set_absence_types, only: [:new, :edit]
 
   def index
-    @absences = policy_scope(Absence).includes(ABSENCE_PRELOAD_FIELDS).paginate(page: params[:page])
+    @pending_absences = policy_scope(Absence).includes(ABSENCE_PRELOAD_FIELDS).
+                          where(absence_status_id: AbsenceStatus::PENDING).all
+    @absences = policy_scope(Absence).includes(ABSENCE_PRELOAD_FIELDS).
+                  where.not(absence_status_id: AbsenceStatus::PENDING).
+                  paginate(page: params[:page])
   end
 
   def edit

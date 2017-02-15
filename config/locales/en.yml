@@ -45,6 +45,7 @@ en:
   actions: "Actions"
   employee: "Employee"
   period_time: "Period time"
+  pending_absences: "Pending absences"
 
   employees: "Employees"
   full_name: "Full name"
