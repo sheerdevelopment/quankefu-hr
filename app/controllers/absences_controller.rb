@@ -35,7 +35,7 @@ class AbsencesController < ApplicationController
 
   def update
     @absence = authorize Absence.find(params[:id])
-    if @absence.update_attributes(update_params)
+    if @absence.update_attributes(absence_params)
       flash[:success] = "Absence request is cancelled."
       redirect_to absences_path
     else

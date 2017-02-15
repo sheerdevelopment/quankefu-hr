@@ -40,13 +40,6 @@
                         %i.fa.fa-calendar
 
                 .form-group
-                  %label.control-label.col-md-3.col-sm-3.col-xs-12{:for => "day"}
-                    = t(:days)
-                  .entry
-                    .col-md-3.col-sm-3.col-xs-3.input-field
-                      %input#days.form-control.col-md-7.col-xs-12{:type => "number", :value => @absence.days, :min => 0, :disabled => "disabled", :required => ""}/
-
-                .form-group
                   %label.control-label.col-md-3.col-sm-3.col-xs-12{:for => "comments"}
                     = t(:comments)
                   .entry
@@ -82,7 +75,6 @@
 
     $('#period').daterangepicker(options);
     $('#period').on('apply.daterangepicker', function(ev, picker) {
-      $('#days').val(daydiff(picker.startDate, picker.endDate));
       $('#absence_start').val(picker.startDate);
       $('#absence_end').val(picker.endDate);
     });
