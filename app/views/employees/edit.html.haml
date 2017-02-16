@@ -44,7 +44,7 @@
                   %label.control-label.col-md-3.col-sm-3.col-xs-12{:for => "avatar"}
                     Avatar
                   .col-md-6.col-sm-6.col-xs-12
-                    = image_tag avatar_url
+                    = image_tag avatar_url(user: @employee)
                     %input#avatar{:type => "file", :name => "employee[avatar]"}/
 
                 .form-group
