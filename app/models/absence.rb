@@ -22,7 +22,7 @@ class Absence < ApplicationRecord
         sum
       end
     end
-    (seconds / SECONDS_A_DAY).round(1)
+    self.days = (seconds / SECONDS_A_DAY).round(1)
   end
 
   def allow_modify?
