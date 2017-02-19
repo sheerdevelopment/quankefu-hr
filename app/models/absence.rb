@@ -8,12 +8,21 @@ class Absence < ApplicationRecord
   SECONDS_A_DAY = 60 * 60 * 24
   WEEKDAYS = (1..5)
   def cal_days
-    range = (self.start.to_date + 1.day)..(self.end.to_date - 1.day)
-    weekdays = range.select { |date| week_day?(date) }.size
-    seconds = 0.0
-    seconds += self.start.seconds_until_end_of_day if week_day?(self.start)
-    seconds += self.end.seconds_since_midnight if week_day?(self.end)
-    self.days = weekdays + (seconds / SECONDS_A_DAY).round(1)
+    start_date, end_date = self.start.to_date, self.end.to_date
+    seconds = (start_date..end_date).reduce(0.0) do |sum, date|
+      if week_day?(date)
+        if start_date == date
+          sum += self.start.seconds_until_end_of_day
+        elsif end_date == date
+          sum += self.end.seconds_since_midnight
+        else
+          sum += SECONDS_A_DAY
+        end
+      else
+        sum
+      end
+    end
+    (seconds / SECONDS_A_DAY).round(1)
   end
 
   def allow_modify?

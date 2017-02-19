@@ -36,5 +36,14 @@ RSpec.describe Absence, type: :model do
         expect(absence.cal_days).to eq(5)
       end
     end
+
+    context "when takes one day" do
+      let(:started_at) { Time.parse("2017-02-20 00:00") }
+      let(:ended_at) { Time.parse("2017-02-20 23:59") }
+
+      it "calculates the days correctly" do
+        expect(absence.cal_days).to eq(1)
+      end
+    end
   end
 end
