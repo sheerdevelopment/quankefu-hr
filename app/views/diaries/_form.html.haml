@@ -50,7 +50,7 @@
                 .ln_solid
                 .form-group
                   .col-md-6.col-sm-6.col-xs-12.col-md-offset-3
-                    %button.btn.btn-success{:type => "submit"}= t(:submit)
+                    = f.submit t(:submit), class: "btn btn-success", disable_with: t(:submitting)
 
 = javascript_include_tag "daterangepicker"
 

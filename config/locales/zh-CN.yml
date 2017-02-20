@@ -36,6 +36,7 @@ zh-CN:
   comments: "备注"
   optional: "选填"
   submit: "提交"
+  submitting: "正在提交"
 
   hi: "你好"
   absence_type: "类别"
