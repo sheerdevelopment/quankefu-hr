@@ -23,9 +23,12 @@ gem "globalize", git: "https://github.com/globalize/globalize"
 gem "activemodel-serializers-xml"
 
 gem "faker"
+gem "google-api-client"
 
 group :development, :test do
   gem "byebug", platform: :mri
+  gem "rspec-rails", "~> 3.5"
+  gem "dotenv-rails"
 end
 
 group :development do
