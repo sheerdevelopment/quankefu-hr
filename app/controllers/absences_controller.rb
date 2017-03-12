@@ -48,6 +48,10 @@ class AbsencesController < ApplicationController
     if @absence.update_attributes(absence_status_id: params[:status])
       flash[:success] = "Absence is updated successfully."
       AbsenceMailer.status_email(user: @absence.user, absence: @absence).deliver
+
+      if @absence.absence_status_id == AbsenceStatus::APPROVED
+        GoogleCalendar.insert_event(@absence)
+      end
     end
     redirect_to absences_path
   end
