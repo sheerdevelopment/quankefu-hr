@@ -21,3 +21,6 @@
 .byebug_history
 /public/files
 /public/avatars
+
+# dotenv
+.env
